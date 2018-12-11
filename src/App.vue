@@ -3,9 +3,9 @@
     <NrgLogo />
     <NrgPlayer />
     <NrgSongInfo />
-    <NrgSocialFacebook class="invisible sm:visible" />
+    <NrgSocialFacebook class="hidden sm:block" />
     <NrgSocialTwitter class="hidden sm:block" />
-    <NrgFooter class="invisible sm:visible" />
+    <NrgFooter />
   </div>
 </template>
 

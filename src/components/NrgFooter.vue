@@ -1,10 +1,11 @@
 <template>
-  <footer class="text-grey-light text-xs">
-    <span>
+  <footer class="text-grey-light text-xs tracking-wide pt-12 sm:pt-2">
+    <span class="text-center">
       <a class="link" href="http://cast.magicstreams.gr:9117">&copy;</a> 2010 -
       {{ new Date().getFullYear() }} EnergyMixRadio. All rights reserved.
-      Designed by
-      <span><a class="link" href="https://github.com/zoispag">ZP</a></span>
+      <span class="hidden sm:inline">
+        | Designed by <a class="link" href="https://github.com/zoispag">ZP</a>
+      </span>
     </span>
   </footer>
 </template>
@@ -20,6 +21,6 @@ export default {
 @import "../assets/styles/tailwind.postcss";
 
 .link {
-  @apply .text-grey-light .no-underline .font-semibold;
+  @apply .text-grey-light .no-underline;
 }
 </style>

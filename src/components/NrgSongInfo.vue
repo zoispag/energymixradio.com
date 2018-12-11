@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2 text-sm sm:text-base">
+  <div class="py-12 sm:py-2 pb-12 sm:pb-4 text-sm sm:text-base">
     <span class="text-red font-bold">Now Playing:</span>&nbsp;
     <span class="text-grey-light">{{ NrgRawMeta }}</span>
   </div>
