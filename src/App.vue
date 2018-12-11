@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <!-- <NrgLogo /> -->
-    <!-- <NrgPlayer /> -->
+    <NrgLogo />
+    <NrgPlayer />
     <NrgSongInfo />
-    <!-- <NrgSocialFacebook /> -->
-    <!-- <NrgSocialTwitter /> -->
-    <!-- <NrgFooter /> -->
+    <NrgSocialFacebook />
+    <NrgSocialTwitter />
+    <NrgFooter />
   </div>
 </template>
 

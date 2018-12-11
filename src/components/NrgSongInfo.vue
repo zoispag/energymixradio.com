@@ -1,8 +1,10 @@
 <template>
 	<div>
-		<strong><font color="red">Now Playing:</font></strong>
+		<strong>
+			<font color="red">Now Playing:</font>
+		</strong>
 		&nbsp;
-		<!-- <span class="cc_streaminfo" data-type="song" data-username="jziwpfyo">Loading...</span> -->
+		<span>{{ NrgRawMeta }}</span>
 	</div>
 </template>
 
@@ -11,13 +13,22 @@ export default {
   name: "NrgSongInfo",
   data () {
   	return {
-  		url: 'http://cast.magicstreams.gr:9117/stats?sid=1&json=1&callback=func'
+  		aUrl: 'http://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo',
+  		NrgRawMeta: 'Loading...',
+  		NrgTrackTitle: 'Loading...',
+  		NrgTrackArtist: 'Loading...'
   	}
   },
+
   mounted () {
-  	fetch(this.url).then(r => r.json())
-	  .then(data => console.log(data))
-	  .catch(e => console.log("Booo"))
+  	fetch(this.aUrl).then(r => r.json())
+	  .then(({data}) => {
+	  	const [info] = data;
+	  	this.NrgRawMeta = info.rawmeta;
+	  	this.NrgTrackTitle = info.track.title;
+	  	this.NrgTrackArtist = info.track.artist;
+	  })
+	  .catch(e => console.log('Something went wrong'))
   }
 };
 </script>
