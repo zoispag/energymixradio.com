@@ -2,9 +2,10 @@
   <footer class="footer">
     <p>
       <span>
-        <a href="#">&copy;</a> 2010 - {{ new Date().getFullYear() }}
-        <a href="http://www.facebook.com/energymixradio">EnergyMixRadio</a>. All
-        rights reserved. | Designed by <span><a href="#">ZP</a></span>
+        <a href="http://cast.magicstreams.gr:9117">&copy;</a> 2010 -
+        {{ new Date().getFullYear() }}
+        <a href="https://www.facebook.com/energymixradio">EnergyMixRadio</a>.
+        All rights reserved. | Designed by <span><a href="#">ZP</a></span>
       </span>
     </p>
   </footer>
