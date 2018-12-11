@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="px-2 py-12 bg-black">
+  <div id="app" class="px-2 py-12">
     <NrgLogo />
     <NrgPlayer />
     <NrgSongInfo />
@@ -32,6 +32,10 @@ export default {
 
 <style lang="scss">
 @import "assets/styles/tailwind.postcss";
+
+body {
+  @apply .bg-black;
+}
 
 #app {
   @apply .antialiased .text-center;
