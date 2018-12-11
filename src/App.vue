@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import 'assets/styles/tailwind.postcss';
+@import "assets/styles/tailwind.postcss";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
