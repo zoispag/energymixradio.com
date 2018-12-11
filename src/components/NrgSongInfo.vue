@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       aUrl:
-        "http://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo",
+        "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo",
       NrgRawMeta: "Loading...",
       NrgTrackTitle: "Loading...",
       NrgTrackArtist: "Loading...",
