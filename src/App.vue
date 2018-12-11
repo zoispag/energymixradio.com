@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <!-- <NrgLogo /> -->
+    <!-- <NrgPlayer /> -->
+    <NrgSongInfo />
+    <!-- <NrgSocialFacebook /> -->
+    <!-- <NrgSocialTwitter /> -->
+    <!-- <NrgFooter /> -->
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import NrgLogo from "./components/NrgLogo.vue";
+import NrgPlayer from "./components/NrgPlayer.vue";
+import NrgSongInfo from "./components/NrgSongInfo.vue";
+import NrgSocialFacebook from "./components/NrgSocialFacebook.vue";
+import NrgSocialTwitter from "./components/NrgSocialTwitter.vue";
+import NrgFooter from "./components/NrgFooter.vue";
 
 export default {
-  name: "app",
+  name: "Nrg",
   components: {
-    HelloWorld
+    NrgLogo,
+    NrgPlayer,
+    NrgSongInfo,
+    NrgSocialFacebook,
+    NrgSocialTwitter,
+    NrgFooter
   }
 };
 </script>
