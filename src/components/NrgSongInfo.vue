@@ -19,7 +19,10 @@ export default {
     };
   },
   mounted() {
-    fetch(this.aUrl)
+    fetch(this.aUrl, {
+      method: "GET",
+      mode: "cors"
+    })
       .then(r => r.json())
       .then(({ data }) => {
         const [info] = data;
