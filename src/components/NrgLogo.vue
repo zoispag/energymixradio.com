@@ -1,5 +1,5 @@
 <template>
-  <div><img src="./../assets/logo.png" /></div>
+  <div class="px-6"><img src="./../assets/logo.png" /></div>
 </template>
 
 <script>
@@ -15,7 +15,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.img {
-  width: 100%;
-}
+@import "../assets/styles/tailwind.postcss";
 </style>

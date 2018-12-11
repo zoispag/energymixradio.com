@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" class="px-2 py-12 bg-black">
     <NrgLogo />
     <NrgPlayer />
     <NrgSongInfo />
-    <NrgSocialFacebook />
-    <NrgSocialTwitter />
-    <NrgFooter />
+    <NrgSocialFacebook class="invisible sm:visible" />
+    <NrgSocialTwitter class="hidden sm:block" />
+    <NrgFooter class="invisible sm:visible" />
   </div>
 </template>
 
@@ -34,11 +34,6 @@ export default {
 @import "assets/styles/tailwind.postcss";
 
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  @apply .antialiased .text-center;
 }
 </style>

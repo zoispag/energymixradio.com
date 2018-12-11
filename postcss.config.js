@@ -23,8 +23,6 @@ module.exports = {
           extensions: extensionsUsingCSS,
         },
       ],
-      whitelist: [],
-      whitelistPatterns: [ /-(leave|enter|appear)(|-(to|from|active))$/, /^(?!(|.*?:)cursor-move).+-move$/, /^router-link(|-exact)-active$/ ],
     }),
     require('autoprefixer')(),
   ],

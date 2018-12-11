@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="py-2">
     <a
       href="https://twitter.com/EnergyMixRadio"
       class="twitter-follow-button"
@@ -13,7 +13,7 @@
 export default {
   name: "NrgSocialTwitter",
   mounted() {
-    !function(d, s, id) {
+    !(function(d, s, id) {
       var js,
         fjs = d.getElementsByTagName(s)[0];
       if (!d.getElementById(id)) {
@@ -22,7 +22,12 @@ export default {
         js.src = "//platform.twitter.com/widgets.js";
         fjs.parentNode.insertBefore(js, fjs);
       }
-    };
+      // eslint-disable-next-line
+    })(document,"script","twitter-wjs");
   }
 };
 </script>
+
+<style scoped lang="scss">
+@import "../assets/styles/tailwind.postcss";
+</style>

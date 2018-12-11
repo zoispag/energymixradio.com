@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <span class="info-head">Now Playing:</span>&nbsp;
-    <span>{{ NrgRawMeta }}</span>
+  <div class="py-2 text-sm sm:text-base">
+    <span class="text-red font-bold">Now Playing:</span>&nbsp;
+    <span class="text-grey-light">{{ NrgRawMeta }}</span>
   </div>
 </template>
 
@@ -36,8 +36,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.info-head {
-  color: red;
-  font-weight: bold;
-}
+@import "../assets/styles/tailwind.postcss";
 </style>

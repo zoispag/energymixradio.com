@@ -1,13 +1,11 @@
 <template>
-  <footer class="footer">
-    <p>
-      <span>
-        <a href="http://cast.magicstreams.gr:9117">&copy;</a> 2010 -
-        {{ new Date().getFullYear() }}
-        <a href="https://www.facebook.com/energymixradio">EnergyMixRadio</a>.
-        All rights reserved. | Designed by <span><a href="#">ZP</a></span>
-      </span>
-    </p>
+  <footer class="text-grey-light text-xs">
+    <span>
+      <a class="link" href="http://cast.magicstreams.gr:9117">&copy;</a> 2010 -
+      {{ new Date().getFullYear() }} EnergyMixRadio. All rights reserved.
+      Designed by
+      <span><a class="link" href="https://github.com/zoispag">ZP</a></span>
+    </span>
   </footer>
 </template>
 
@@ -19,18 +17,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-div.footer {
-  position: relative;
-  width: 650px;
-  top: 15px;
-}
-div.footer p {
-  font-weight: bold;
-  font-size: 10px;
-  color: #ffffff;
-}
-div.footer a {
-  color: #ffffff;
-  text-decoration: none;
+@import "../assets/styles/tailwind.postcss";
+
+.link {
+  @apply .text-grey-light .no-underline .font-semibold;
 }
 </style>
