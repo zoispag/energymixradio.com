@@ -3,8 +3,8 @@
     <NrgLogo />
     <NrgPlayer />
     <NrgSongInfo />
-    <NrgSocialFacebook class="hidden sm:block" />
-    <NrgSocialTwitter class="hidden sm:block" />
+    <NrgSocialFacebook />
+    <NrgSocialTwitter />
     <NrgFooter />
   </div>
 </template>

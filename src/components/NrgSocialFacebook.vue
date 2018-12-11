@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2">
+  <div class="py-2 hidden sm:block">
     <iframe
       src="https://www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2FEnergyMixRadio%2F109462505812616&amp;width=292&amp;colorscheme=dark&amp;show_faces=false&amp;border_color&amp;stream=false&amp;header=false&amp;height=65"
       scrolling="no"

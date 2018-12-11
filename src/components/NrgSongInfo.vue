@@ -15,22 +15,32 @@ export default {
       NrgRawMeta: "Loading...",
       NrgTrackTitle: "Loading...",
       NrgTrackArtist: "Loading...",
-      error: {}
+      error: {},
+      interval: null
     };
   },
   mounted() {
-    fetch(this.aUrl, {
-      method: "GET",
-      mode: "cors"
-    })
-      .then(r => r.json())
-      .then(({ data }) => {
-        const [info] = data;
-        this.NrgRawMeta = info.rawmeta;
-        this.NrgTrackTitle = info.track.title;
-        this.NrgTrackArtist = info.track.artist;
+    this.fetchSong();
+    this.interval = setInterval(this.fetchSong, 5000);
+  },
+  beforeDestroy() {
+    clearInterval(this.interval);
+  },
+  methods: {
+    fetchSong() {
+      fetch(this.aUrl, {
+        method: "GET",
+        mode: "cors"
       })
-      .catch(e => (this.error = e));
+        .then(r => r.json())
+        .then(({ data }) => {
+          const [info] = data;
+          this.NrgRawMeta = info.rawmeta;
+          this.NrgTrackTitle = info.track.title;
+          this.NrgTrackArtist = info.track.artist;
+        })
+        .catch(e => (this.error = e));
+    }
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="py-2">
+  <div class="py-2 hidden sm:block">
     <a
       href="https://twitter.com/EnergyMixRadio"
       class="twitter-follow-button"
