@@ -14,7 +14,8 @@ export default {
         "http://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo",
       NrgRawMeta: "Loading...",
       NrgTrackTitle: "Loading...",
-      NrgTrackArtist: "Loading..."
+      NrgTrackArtist: "Loading...",
+      error: {}
     };
   },
   mounted() {
@@ -26,7 +27,7 @@ export default {
         this.NrgTrackTitle = info.track.title;
         this.NrgTrackArtist = info.track.artist;
       })
-      .catch(e => console.log("Something went wrong" + e));
+      .catch(e => (this.error = e));
   }
 };
 </script>
