@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "register-service-worker": "^1.5.2",
-    "vue": "^2.5.17"
+    "snowf": "0.0.3",
+    "vue": "^2.5.17",
+    "vue-snowf": "0.0.2"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^1.1.0",
