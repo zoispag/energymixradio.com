@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="px-2 py-12">
     <Snowf
+      class="invisible sm:visible"
       v-if="showSnow"
       :amount="50"
       :size="5"
