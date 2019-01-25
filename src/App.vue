@@ -43,7 +43,7 @@ export default {
     NrgSocialTwitter,
     NrgFooter
   },
-  methods: {
+  computed: {
     showSnow() {
       return new Date().getMonth() === 11;
     }
