@@ -12,7 +12,7 @@ export default {
   name: "NrgPlayer",
   data() {
     return {
-      playerSource: "https://radio.djharrym.com/"
+      playerSource: "https://cast.magicstreams.gr/sc/jziwpfyo/stream"
     };
   }
 };
