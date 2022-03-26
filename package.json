@@ -25,6 +25,7 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "postcss-preset-env": "^6.3.0",
+    "sass": "^1.49.9",
     "sass-loader": "^7.0.1",
     "tailwindcss": "^0.7.0",
     "vue-template-compiler": "^2.5.17"
