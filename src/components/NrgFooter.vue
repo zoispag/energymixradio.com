@@ -1,26 +1,18 @@
+<script setup>
+const currentYear = new Date().getFullYear();
+const streamUrl = "http://cast.magicstreams.gr:9117";
+const gitHub = "https://github.com/zoispag";
+</script>
+
 <template>
-  <footer class="text-grey-light text-xs tracking-wide pt-12 sm:pt-2">
+  <footer class="text-gray-300 text-xs tracking-wide pt-12 sm:pt-2">
     <span class="text-center">
-      <a class="link" href="http://cast.magicstreams.gr:9117">&copy;</a> 2010 -
-      {{ new Date().getFullYear() }} EnergyMixRadio. All rights reserved.
+      <a class="text-gray-300 no-underline" :href="streamUrl">&copy;</a>
+      2010 - {{ currentYear }} EnergyMixRadio. All rights reserved.
       <span class="hidden sm:inline">
-        | Designed by <a class="link" href="https://github.com/zoispag">ZP</a>
+        | Designed by
+        <a class="text-gray-300 no-underline" :href="gitHub">ZP</a>
       </span>
     </span>
   </footer>
 </template>
-
-<script>
-export default {
-  name: "NrgFooter"
-};
-</script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "../assets/styles/tailwind.postcss";
-
-.link {
-  @apply .text-grey-light .no-underline;
-}
-</style>

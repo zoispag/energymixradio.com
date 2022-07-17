@@ -1,64 +1,19 @@
+<script setup>
+import NgrLogo from "@/components/NgrLogo.vue";
+import NrgPlayer from "@/components/Radio/NrgPlayer.vue";
+import NrgSongInfo from "@/components/Radio/NrgSongInfo.vue";
+import Facebook from "@/components/Social/NrgFacebook.vue";
+import Twitter from "@/components/Social/NrgTwitter.vue";
+import NrgFooter from "@/components/NrgFooter.vue";
+</script>
+
 <template>
-  <div id="app" class="px-2 py-12">
-    <Snowf
-      class="invisible sm:visible"
-      v-if="showSnow"
-      :amount="50"
-      :size="5"
-      :speed="1.5"
-      :wind="0"
-      :opacity="0.8"
-      :swing="1"
-      :image="null"
-      :zIndex="null"
-      :resize="true"
-      color="#fff"
-    />
-    <NrgLogo />
+  <div class="grid place-items-center antialiased px-2 py-12">
+    <NgrLogo />
     <NrgPlayer />
     <NrgSongInfo />
-    <NrgSocialFacebook />
-    <NrgSocialTwitter />
+    <Facebook />
+    <Twitter />
     <NrgFooter />
   </div>
 </template>
-
-<script>
-import Snowf from "vue-snowf";
-import NrgLogo from "./components/NrgLogo.vue";
-import NrgPlayer from "./components/NrgPlayer.vue";
-import NrgSongInfo from "./components/NrgSongInfo.vue";
-import NrgSocialFacebook from "./components/NrgSocialFacebook.vue";
-import NrgSocialTwitter from "./components/NrgSocialTwitter.vue";
-import NrgFooter from "./components/NrgFooter.vue";
-
-export default {
-  name: "Nrg",
-  components: {
-    Snowf,
-    NrgLogo,
-    NrgPlayer,
-    NrgSongInfo,
-    NrgSocialFacebook,
-    NrgSocialTwitter,
-    NrgFooter
-  },
-  computed: {
-    showSnow() {
-      return new Date().getMonth() === 11;
-    }
-  }
-};
-</script>
-
-<style lang="scss">
-@import "assets/styles/tailwind.postcss";
-
-body {
-  @apply .bg-black;
-}
-
-#app {
-  @apply .antialiased .text-center;
-}
-</style>
