@@ -3,8 +3,9 @@
   functions = "netlify/functions"
   publish = "dist"
 
-## Uncomment to use this redirect for Single Page Applications
-## Not needed for static site generators.
+[context.production.environment]
+  NODE_ENV = "production"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
