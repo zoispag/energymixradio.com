@@ -1,15 +1,11 @@
 <script setup>
 import { ref, onMounted, onBeforeMount } from "vue";
 
-let streamUrl =
+const streamUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
 
 const interval = ref(null);
 const rawResponse = ref("Loading...");
-
-// NrgRawMeta: "Loading...",
-// NrgTrackTitle: "Loading...",
-// NrgTrackArtist: "Loading...",
 
 onMounted(() => {
   fetchSong();
@@ -17,19 +13,13 @@ onMounted(() => {
 });
 
 onBeforeMount(() => {
-  clearInterval(interval);
+  clearInterval(interval.value);
 });
 
 function fetchSong() {
-  fetch(streamUrl, {
-    method: "GET",
-    mode: "cors",
-  })
-    .then((r) => r.json())
-    .then(({ data }) => {
-      const [info] = data;
-      rawResponse.value = info.rawmeta;
-    })
+  fetch(streamUrl, { method: "GET", mode: "cors" })
+    .then((response) => response.json())
+    .then((data) => (rawResponse.value = data.data[0].rawmeta))
     .catch((error) => console.log(error));
 }
 </script>
