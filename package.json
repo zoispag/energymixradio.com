@@ -1,33 +1,25 @@
 {
-  "name": "nrgVue",
-  "version": "0.1.0",
-  "private": true,
+  "name": "energymixradio.com",
+  "version": "1.0.0",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 4173",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "register-service-worker": "^1.5.2",
-    "snowf": "0.0.3",
-    "vue": "^2.5.17",
-    "vue-snowf": "0.0.2"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
-    "@fullhuman/postcss-purgecss": "^1.1.0",
-    "@ky-is/vue-cli-plugin-tailwind": "^1.5.0",
-    "@vue/cli-plugin-babel": "^3.1.1",
-    "@vue/cli-plugin-eslint": "^3.1.5",
-    "@vue/cli-plugin-pwa": "^3.1.2",
-    "@vue/cli-service": "^3.1.4",
-    "@vue/eslint-config-prettier": "^4.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.8.0",
-    "eslint-plugin-vue": "^5.0.0-0",
-    "node-sass": "^4.13.1",
-    "postcss-preset-env": "^6.3.0",
-    "sass-loader": "^7.0.1",
-    "tailwindcss": "^0.7.0",
-    "vue-template-compiler": "^2.5.17"
+    "@rushstack/eslint-patch": "^1.1.0",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.5.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "postcss": "^8.4.14",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^3.1.6",
+    "vite": "^2.9.14"
   }
 }
