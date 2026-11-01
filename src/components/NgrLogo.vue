@@ -1,6 +1,6 @@
 <template>
   <div class="w-full max-w-xs sm:max-w-md px-2 pb-6 sm:pb-2">
-    <img src="@/assets/logo.png" alt="EnergyMixRadio" class="logo mx-auto w-full" />
+    <img src="@/assets/logo.webp" alt="EnergyMixRadio" width="797" height="469" fetchpriority="high" class="logo mx-auto w-full" />
   </div>
 </template>
 
