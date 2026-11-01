@@ -4,9 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "24"
-
-[context.production.environment]
-  NODE_ENV = "production"
+  # The build tools (vite, tailwind) are devDependencies. Netlify sets NODE_ENV=production,
+  # which would make npm skip them, so ask for them explicitly.
+  NPM_CONFIG_INCLUDE = "dev"
 
 [[redirects]]
   from = "/*"
