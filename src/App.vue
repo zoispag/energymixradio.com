@@ -3,8 +3,7 @@ import { radio } from "@/store";
 import NgrLogo from "@/components/NgrLogo.vue";
 import NrgPlayer from "@/components/Radio/NrgPlayer.vue";
 import NrgSongInfo from "@/components/Radio/NrgSongInfo.vue";
-import Facebook from "@/components/Social/NrgFacebook.vue";
-import Twitter from "@/components/Social/NrgTwitter.vue";
+import NrgSocial from "@/components/Social/NrgSocial.vue";
 import NrgHistory from "@/components/Radio/NrgHistory.vue";
 import NrgEqualizer from "@/components/Radio/NrgEqualizer.vue";
 import NrgSleepTimer from "@/components/Radio/NrgSleepTimer.vue";
@@ -23,8 +22,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
     <NrgHistory />
     <NrgInstall />
     <NrgShare />
-    <Facebook />
-    <Twitter />
+    <NrgSocial />
     <NrgFooter />
   </div>
 </template>
