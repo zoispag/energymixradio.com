@@ -1,7 +1,7 @@
 <template>
-  <div class="w-full max-w-xs sm:max-w-md px-2 pb-6 sm:pb-2">
-    <img src="@/assets/logo.webp" alt="EnergyMixRadio" width="797" height="469" fetchpriority="high" class="logo mx-auto w-full" />
-    <p class="mt-4 flex items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.25em] text-gray-300">
+  <div class="flex w-full flex-col items-center px-2 pb-4 lg:pb-1">
+    <img src="@/assets/logo.webp" alt="EnergyMixRadio" width="797" height="469" fetchpriority="high" class="logo w-full max-w-xs sm:max-w-sm lg:w-[min(22rem,38vh)]" />
+    <p class="mt-2 flex whitespace-nowrap lg:mt-1 items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.25em] text-gray-300">
       <span class="live-dot" aria-hidden="true"></span>
       Live 24/7 · Non-stop mixes
     </p>

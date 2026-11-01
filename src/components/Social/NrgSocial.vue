@@ -1,5 +1,5 @@
 <template>
-  <nav class="mb-4 flex items-center gap-3" aria-label="Follow us">
+  <nav class="flex items-center gap-3" aria-label="Follow us">
     <a
       href="https://www.facebook.com/energymixradio"
       target="_blank"

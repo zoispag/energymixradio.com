@@ -40,7 +40,7 @@ onBeforeUnmount(() => clearInterval(tick));
 </script>
 
 <template>
-  <div v-if="radio.playing" class="mb-4 flex items-center gap-2 text-xs text-gray-400">
+  <div v-if="radio.playing" class="flex items-center gap-2 text-xs text-gray-400">
     <template v-if="endsAt">
       <span>😴 Stopping in <span class="font-mono text-gray-100">{{ label }}</span></span>
       <button type="button" class="underline hover:text-white" @click="cancel">cancel</button>

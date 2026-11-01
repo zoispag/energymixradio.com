@@ -29,15 +29,7 @@ async function share() {
 </script>
 
 <template>
-  <div class="mb-4 flex flex-wrap items-center justify-center gap-3">
-    <a
-      href="https://m.me/energymixradio"
-      target="_blank"
-      rel="noopener"
-      class="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-widest text-gray-200 transition hover:border-red-500 hover:text-white"
-    >
-      🎧 Request a song
-    </a>
+  <div class="flex items-center">
     <button
       type="button"
       class="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-widest text-gray-200 transition hover:border-red-500 hover:text-white"

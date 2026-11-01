@@ -66,7 +66,7 @@ function fetchArtwork(meta) {
 </script>
 
 <template>
-  <div class="relative w-full max-w-sm my-6 px-2">
+  <div class="relative w-full max-w-sm px-2">
     <img
       v-if="artwork"
       :key="`bg-${artwork}`"
@@ -93,7 +93,7 @@ function fetchArtwork(meta) {
         {{ radio.favorites.includes(rawResponse) ? "♥" : "♡" }}
       </button>
     </div>
-    <div v-if="artwork || rawResponse !== 'Loading...'" class="mt-3 flex items-center justify-center gap-2 text-xs">
+    <div v-if="artwork || rawResponse !== 'Loading...'" class="mt-2 flex items-center justify-center gap-2 text-xs">
       <span class="text-gray-500">Find this song:</span>
       <a
         v-for="l in links"

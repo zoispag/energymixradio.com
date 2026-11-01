@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { radio, toggleFavorite } from "@/store";
 
 // The first entry is the track playing right now
-const earlier = computed(() => radio.history.slice(1));
+const earlier = computed(() => radio.history.slice(1, 4));
 
 function ago(ts) {
   const m = Math.round((Date.now() - ts) / 60000);
@@ -14,9 +14,9 @@ function ago(ts) {
 </script>
 
 <template>
-  <section v-if="earlier.length" class="w-full max-w-sm px-2 pb-6">
-    <h2 class="mb-3 text-xs font-bold uppercase tracking-widest text-gray-400">Recently played</h2>
-    <ol class="relative space-y-2 border-l border-red-900/60 pl-4">
+  <section v-if="earlier.length" class="w-full max-w-sm px-2">
+    <h2 class="mb-2 text-xs font-bold uppercase tracking-widest text-gray-400">Recently played</h2>
+    <ol class="relative space-y-1.5 border-l border-red-900/60 pl-4">
       <li v-for="t in earlier" :key="t.at" class="relative flex items-center gap-3">
         <span class="absolute -left-[21px] h-2 w-2 rounded-full bg-red-600"></span>
         <img v-if="t.art" :src="t.art" alt="" class="h-10 w-10 rounded-md object-cover" loading="lazy" />

@@ -15,18 +15,29 @@ import NrgFooter from "@/components/NrgFooter.vue";
 </script>
 
 <template>
-  <div class="grid grid-cols-[minmax(0,1fr)] place-items-center antialiased px-4 py-10 min-h-screen overflow-x-hidden" :style="{ '--accent': radio.accent }">
+  <div
+    class="flex min-h-[100dvh] flex-col overflow-x-hidden px-4 antialiased lg:h-[100dvh] lg:overflow-hidden"
+    :style="{ '--accent': radio.accent }"
+  >
     <NrgBackdrop />
     <NrgEqualizer />
-    <NgrLogo />
-    <NrgPlayer />
-    <NrgSleepTimer />
-    <NrgSongInfo />
-    <NrgHistory />
-    <NrgFavorites />
-    <NrgInstall />
-    <NrgShare />
-    <NrgSocial />
+    <main class="mx-auto grid w-full max-w-5xl flex-1 grid-cols-[minmax(0,1fr)] content-center place-items-center gap-y-6 py-6 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-0 lg:py-2">
+      <section class="flex w-full flex-col items-center">
+        <NgrLogo />
+        <NrgPlayer />
+        <NrgSleepTimer />
+      </section>
+      <section class="flex w-full flex-col items-center [&>*]:!mb-0 [&>*]:!mt-0 gap-3">
+        <NrgSongInfo />
+        <NrgHistory />
+        <NrgFavorites />
+        <NrgInstall />
+        <div class="flex flex-wrap items-center justify-center gap-3 [&>*]:!mb-0">
+          <NrgShare />
+          <NrgSocial />
+        </div>
+      </section>
+    </main>
     <NrgFooter />
   </div>
 </template>

@@ -121,10 +121,10 @@ function toggle() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center p-4">
+  <div class="flex flex-col items-center px-4 py-3 lg:py-2">
     <button
       type="button"
-      class="player-btn relative grid place-items-center h-40 w-40 sm:h-48 sm:w-48 rounded-full text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-red-300"
+      class="player-btn relative grid place-items-center h-40 w-40 lg:h-[min(11rem,22vh)] lg:w-[min(11rem,22vh)] rounded-full text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-red-300"
       :class="{ 'is-live': state === 'playing' }"
       :aria-label="state === 'idle' ? 'Play live radio' : 'Stop radio'"
       @click="toggle"
@@ -139,12 +139,12 @@ function toggle() {
         <path d="M8 5v14l11-7z" />
       </svg>
     </button>
-    <p class="mt-5 text-xs uppercase tracking-[0.3em] text-gray-400">
+    <p class="mt-3 text-xs uppercase tracking-[0.3em] text-gray-400">
       <span v-if="state === 'idle'">Tap to listen live</span>
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
       <span v-else class="text-red-400">● On air</span>
     </p>
-    <label v-if="state !== 'idle'" class="mt-4 flex items-center gap-3 text-gray-400">
+    <label v-if="state !== 'idle'" class="mt-2 flex items-center gap-3 text-gray-400">
       <span aria-hidden="true">{{ volume === 0 ? "🔇" : volume < 0.5 ? "🔉" : "🔊" }}</span>
       <input v-model.number="volume" :style="{ '--v': volume }" type="range" min="0" max="1" step="0.01" aria-label="Volume" class="vol" />
     </label>
