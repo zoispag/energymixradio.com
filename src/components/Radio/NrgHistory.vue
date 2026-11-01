@@ -57,7 +57,7 @@ function ago(ts) {
   display: none;
 }
 .history-scroll.has-more {
-  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1rem), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1rem), transparent);
 }
 </style>
