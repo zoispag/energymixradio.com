@@ -31,10 +31,10 @@ async function install() {
   <div v-if="!standalone && (prompt || isIos)" class="mb-4 text-center">
     <button
       type="button"
-      class="rounded-full bg-red-600 px-6 py-2 text-xs font-bold uppercase tracking-widest text-white shadow-lg shadow-red-900/50 transition hover:bg-red-500"
+      class="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-widest text-gray-200 transition hover:border-white/60 hover:text-white"
       @click="install"
     >
-      Get the app · one tap to listen
+      Install app
     </button>
     <p v-if="showIosHint" class="mt-2 text-xs text-gray-400">
       Tap <span class="font-bold">Share</span>, then <span class="font-bold">Add to Home Screen</span>.
