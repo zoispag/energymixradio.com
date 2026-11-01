@@ -119,3 +119,14 @@ test("stays usable on a phone (scrolls vertically, never sideways)", async ({ pa
   expect(sideways).toBeLessThanOrEqual(0);
   await expect(page.getByRole("button", { name: "Play live radio" })).toBeVisible();
 });
+
+test("focus mode opens full-screen now-playing and closes with Escape", async ({ page }) => {
+  await page.goto("/");
+  await page.clock.runFor(100);
+  await page.getByRole("button", { name: "Open focus mode" }).click();
+  const dialog = page.getByRole("dialog", { name: "Focus mode" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog).toContainText("Light Years (Extended Mix)");
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+});

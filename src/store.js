@@ -26,6 +26,7 @@ export const radio = reactive({
   favorites: loadFavs(),
   accent: "rgb(185 28 28)",
   stopRequested: 0,
+  focusMode: false,
 });
 
 // Average the vivid pixels of the cover to get a background accent colour
