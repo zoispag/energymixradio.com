@@ -5,7 +5,7 @@ const KEY = "emr-history";
 function load() {
   try {
     return JSON.parse(localStorage.getItem(KEY)) || [];
-  } catch (e) {
+  } catch {
     return [];
   }
 }
@@ -13,7 +13,7 @@ function load() {
 function loadFavs() {
   try {
     return JSON.parse(localStorage.getItem("emr-favs")) || [];
-  } catch (e) {
+  } catch {
     return [];
   }
 }
@@ -48,7 +48,7 @@ export function pickAccent(src) {
           r += d[i] * weight; g += d[i + 1] * weight; b += d[i + 2] * weight; w += weight;
         }
         resolve(`rgb(${Math.round(r / w)} ${Math.round(g / w)} ${Math.round(b / w)})`);
-      } catch (e) {
+      } catch {
         resolve(null);
       }
     };
@@ -64,7 +64,7 @@ export function remember(meta, art) {
   radio.history = list.slice(0, 8);
   try {
     localStorage.setItem(KEY, JSON.stringify(radio.history));
-  } catch (e) {
+  } catch {
     /* storage unavailable */
   }
 }
@@ -76,7 +76,7 @@ export function toggleFavorite(meta) {
     : [meta, ...radio.favorites].slice(0, 100);
   try {
     localStorage.setItem("emr-favs", JSON.stringify(radio.favorites));
-  } catch (e) {
+  } catch {
     /* storage unavailable */
   }
 }

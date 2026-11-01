@@ -13,7 +13,7 @@ async function share() {
   if (navigator.share) {
     try {
       await navigator.share(data);
-    } catch (e) {
+    } catch {
       /* user dismissed */
     }
     return;
@@ -22,7 +22,7 @@ async function share() {
     await navigator.clipboard.writeText(`${data.text} ${data.url}`);
     copied.value = true;
     setTimeout(() => (copied.value = false), 2000);
-  } catch (e) {
+  } catch {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(data.text)}&url=${encodeURIComponent(data.url)}`);
   }
 }

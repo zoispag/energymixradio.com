@@ -16,7 +16,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
 
 <template>
   <div
-    class="flex min-h-[100dvh] flex-col overflow-x-hidden px-4 antialiased lg:h-[100dvh] lg:overflow-hidden"
+    class="flex min-h-dvh flex-col overflow-x-hidden px-4 antialiased lg:h-dvh lg:overflow-hidden"
     :style="{ '--accent': radio.accent }"
   >
     <NrgBackdrop />
@@ -27,12 +27,12 @@ import NrgFooter from "@/components/NrgFooter.vue";
         <NrgPlayer />
         <NrgSleepTimer />
       </section>
-      <section class="flex w-full flex-col items-center [&>*]:!mb-0 [&>*]:!mt-0 gap-3">
+      <section class="flex w-full flex-col items-center [&>*]:mb-0! [&>*]:mt-0! gap-3">
         <NrgSongInfo />
         <NrgHistory />
         <NrgFavorites />
         <NrgInstall />
-        <div class="flex flex-wrap items-center justify-center gap-3 [&>*]:!mb-0">
+        <div class="flex flex-wrap items-center justify-center gap-3 [&>*]:mb-0!">
           <NrgShare />
           <NrgSocial />
         </div>

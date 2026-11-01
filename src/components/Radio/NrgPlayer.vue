@@ -10,14 +10,14 @@ const volume = ref(1);
 try {
   const saved = parseFloat(localStorage.getItem("emr-volume"));
   if (!Number.isNaN(saved)) volume.value = saved;
-} catch (e) {
+} catch {
   /* storage unavailable */
 }
 watch(volume, (v) => {
   if (audio.value) audio.value.volume = v;
   try {
     localStorage.setItem("emr-volume", String(v));
-  } catch (e) {
+  } catch {
     /* storage unavailable */
   }
 });
@@ -124,7 +124,7 @@ function toggle() {
   <div class="flex flex-col items-center px-4 py-3 lg:py-2">
     <button
       type="button"
-      class="player-btn relative grid place-items-center h-40 w-40 lg:h-[min(11rem,22vh)] lg:w-[min(11rem,22vh)] rounded-full text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-red-300"
+      class="player-btn relative grid place-items-center h-40 w-40 lg:h-[min(11rem,22vh)] lg:w-[min(11rem,22vh)] rounded-full text-white focus:outline-hidden focus-visible:ring-4 focus-visible:ring-red-300"
       :class="{ 'is-live': state === 'playing' }"
       :aria-label="state === 'idle' ? 'Play live radio' : 'Stop radio'"
       @click="toggle"

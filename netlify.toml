@@ -1,7 +1,9 @@
 [build]
-  command = "vite build"
-  functions = "netlify/functions"
+  command = "npm run build"
   publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
 
 [context.production.environment]
   NODE_ENV = "production"

@@ -75,7 +75,7 @@ function fetchArtwork(meta) {
       class="pointer-events-none absolute inset-0 -z-10 h-full w-full scale-150 rounded-3xl object-cover opacity-30 blur-3xl art-in"
     />
     <div class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
-      <div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-gradient-to-br from-red-700 to-black">
+      <div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-linear-to-br from-red-700 to-black">
         <img v-if="artwork" :key="artwork" :src="artwork" alt="Album cover" class="h-full w-full object-cover art-in" />
         <div v-else class="grid h-full w-full place-items-center text-3xl text-white/70">♪</div>
       </div>
