@@ -64,6 +64,15 @@ function onDrop() {
   retryTimer = setTimeout(connect, Math.min(1000 * 2 ** retries++, 8000));
 }
 
+let stallTimer = null;
+function onStall() {
+  clearTimeout(stallTimer);
+  stallTimer = setTimeout(onDrop, 6000);
+}
+function clearStall() {
+  clearTimeout(stallTimer);
+}
+
 function onPlaying() {
   retries = 0;
   reconnecting.value = false;
@@ -75,6 +84,7 @@ function stop() {
   retries = 0;
   reconnecting.value = false;
   clearTimeout(retryTimer);
+  clearTimeout(stallTimer);
   const el = audio.value;
   el.pause();
   el.removeAttribute("src");
@@ -121,8 +131,9 @@ function toggle() {
       ref="audio"
       preload="none"
       @playing="onPlaying"
+      @timeupdate="clearStall"
       @error="onDrop"
-      @stalled="onDrop"
+      @stalled="onStall"
       @ended="onDrop"
     ></audio>
   </div>

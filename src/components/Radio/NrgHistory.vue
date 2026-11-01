@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { radio } from "@/store";
+import { radio, toggleFavorite } from "@/store";
 
 // The first entry is the track playing right now
 const earlier = computed(() => radio.history.slice(1));
@@ -25,6 +25,15 @@ function ago(ts) {
           <span class="block truncate text-sm text-gray-200">{{ t.meta }}</span>
           <span class="block text-xs text-gray-500">{{ ago(t.at) }}</span>
         </span>
+        <button
+          type="button"
+          class="ml-auto p-1 text-lg leading-none"
+          :class="radio.favorites.includes(t.meta) ? 'text-red-500' : 'text-white/30 hover:text-white'"
+          :aria-label="radio.favorites.includes(t.meta) ? 'Remove from favourites' : 'Save to favourites'"
+          @click="toggleFavorite(t.meta)"
+        >
+          {{ radio.favorites.includes(t.meta) ? "♥" : "♡" }}
+        </button>
       </li>
     </ol>
   </section>

@@ -10,11 +10,20 @@ function load() {
   }
 }
 
+function loadFavs() {
+  try {
+    return JSON.parse(localStorage.getItem("emr-favs")) || [];
+  } catch (e) {
+    return [];
+  }
+}
+
 export const radio = reactive({
   meta: "",
   artwork: null,
   playing: false,
   history: load(),
+  favorites: loadFavs(),
   accent: "rgb(185 28 28)",
   stopRequested: 0,
 });
@@ -55,6 +64,18 @@ export function remember(meta, art) {
   radio.history = list.slice(0, 8);
   try {
     localStorage.setItem(KEY, JSON.stringify(radio.history));
+  } catch (e) {
+    /* storage unavailable */
+  }
+}
+
+export function toggleFavorite(meta) {
+  if (!meta || meta === "Loading...") return;
+  radio.favorites = radio.favorites.includes(meta)
+    ? radio.favorites.filter((m) => m !== meta)
+    : [meta, ...radio.favorites].slice(0, 100);
+  try {
+    localStorage.setItem("emr-favs", JSON.stringify(radio.favorites));
   } catch (e) {
     /* storage unavailable */
   }

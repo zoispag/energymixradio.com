@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
-import { radio, remember, pickAccent } from "@/store";
+import { radio, remember, pickAccent, toggleFavorite } from "@/store";
 
 const streamUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
@@ -79,10 +79,19 @@ function fetchArtwork(meta) {
         <img v-if="artwork" :key="artwork" :src="artwork" alt="Album cover" class="h-full w-full object-cover art-in" />
         <div v-else class="grid h-full w-full place-items-center text-3xl text-white/70">♪</div>
       </div>
-      <div class="min-w-0 text-left">
+      <div class="min-w-0 flex-1 text-left">
         <div class="text-xs font-bold uppercase tracking-widest text-red-500">Now Playing</div>
         <div class="mt-1 text-sm sm:text-base text-gray-100 leading-snug break-words">{{ rawResponse }}</div>
       </div>
+      <button
+        type="button"
+        class="heart shrink-0 self-start p-1 text-2xl leading-none transition hover:scale-110"
+        :class="radio.favorites.includes(rawResponse) ? 'text-red-500' : 'text-white/40 hover:text-white'"
+        :aria-label="radio.favorites.includes(rawResponse) ? 'Remove from favourites' : 'Save to favourites'"
+        @click="toggleFavorite(rawResponse)"
+      >
+        {{ radio.favorites.includes(rawResponse) ? "♥" : "♡" }}
+      </button>
     </div>
     <div v-if="artwork || rawResponse !== 'Loading...'" class="mt-3 flex items-center justify-center gap-2 text-xs">
       <span class="text-gray-500">Find this song:</span>
