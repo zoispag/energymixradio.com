@@ -130,3 +130,22 @@ test("focus mode opens full-screen now-playing and closes with Escape", async ({
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
 });
+
+test("tells the listener when the stream is unreachable, then recovers on retry", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__fail = true;
+    HTMLMediaElement.prototype.play = function () {
+      if (window.__fail) return Promise.reject(new Error("offline"));
+      queueMicrotask(() => this.dispatchEvent(new Event("playing")));
+      return Promise.resolve();
+    };
+  });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Play live radio" }).click();
+  await page.clock.runFor(60_000);
+  await expect(page.getByText("Stream unreachable")).toBeVisible();
+
+  await page.evaluate(() => (window.__fail = false));
+  await page.getByRole("button", { name: "Play live radio" }).click();
+  await expect(page.getByText("On air")).toBeVisible();
+});

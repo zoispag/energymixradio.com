@@ -34,13 +34,14 @@ describe("NrgPlayer", () => {
     expect(radio.playing).toBe(false);
   });
 
-  it("falls back to idle if the browser refuses to play and retries are exhausted", async () => {
+  it("tells the listener when the stream stays unreachable after retries", async () => {
     vi.useFakeTimers();
     HTMLMediaElement.prototype.play.mockRejectedValue(new Error("blocked"));
     const w = mount(NrgPlayer);
     await w.find("button").trigger("click");
     await vi.runAllTimersAsync();
-    expect(w.text()).toContain("Tap to listen live");
+    expect(w.text()).toContain("Stream unreachable");
+    expect(w.find("button").attributes("aria-label")).toBe("Play live radio");
     vi.useRealTimers();
   });
 });

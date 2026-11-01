@@ -63,6 +63,7 @@ let wantPlay = false;
 let retries = 0;
 let retryTimer = null;
 const reconnecting = ref(false);
+const failed = ref(false);
 
 function connect() {
   const el = audio.value;
@@ -74,7 +75,11 @@ function connect() {
 // Mobile networks drop live streams constantly; quietly rejoin instead of going silent
 function onDrop() {
   if (!wantPlay) return;
-  if (retries >= 6) return stop();
+  if (retries >= 6) {
+    stop();
+    failed.value = true;
+    return;
+  }
   reconnecting.value = true;
   state.value = "loading";
   clearTimeout(retryTimer);
@@ -112,6 +117,7 @@ function stop() {
 function toggle() {
   if (state.value === "idle") {
     wantPlay = true;
+    failed.value = false;
     state.value = "loading";
     connect();
   } else {
@@ -140,7 +146,8 @@ function toggle() {
       </svg>
     </button>
     <p class="mt-3 text-xs uppercase tracking-[0.3em] text-gray-400">
-      <span v-if="state === 'idle'">Tap to listen live</span>
+      <span v-if="state === 'idle' && failed" class="text-amber-400">Stream unreachable · tap to retry</span>
+      <span v-else-if="state === 'idle'">Tap to listen live</span>
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
       <span v-else class="text-red-400">● On air</span>
     </p>

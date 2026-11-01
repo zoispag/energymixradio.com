@@ -20,6 +20,24 @@ function onKey(e) {
   else if (e.key.toLowerCase() === "f" && !e.metaKey && !e.ctrlKey) radio.focusMode = !radio.focusMode;
 }
 
+// Keep the screen awake while the focus view is up and the radio is playing (TV / second-screen use)
+let wakeLock = null;
+async function syncWakeLock() {
+  const want = radio.focusMode && radio.playing && document.visibilityState === "visible";
+  if (want && !wakeLock && navigator.wakeLock) {
+    try {
+      wakeLock = await navigator.wakeLock.request("screen");
+      wakeLock.addEventListener("release", () => (wakeLock = null));
+    } catch {
+      wakeLock = null;
+    }
+  } else if (!want && wakeLock) {
+    await wakeLock.release().catch(() => {});
+    wakeLock = null;
+  }
+}
+watch(() => [radio.focusMode, radio.playing], syncWakeLock);
+
 // Fullscreen is a nicety; the overlay works without it
 watch(
   () => radio.focusMode,
@@ -39,10 +57,13 @@ function onFullscreenChange() {
 onMounted(() => {
   window.addEventListener("keydown", onKey);
   document.addEventListener("fullscreenchange", onFullscreenChange);
+  document.addEventListener("visibilitychange", syncWakeLock);
 });
 onBeforeUnmount(() => {
   window.removeEventListener("keydown", onKey);
   document.removeEventListener("fullscreenchange", onFullscreenChange);
+  document.removeEventListener("visibilitychange", syncWakeLock);
+  wakeLock?.release().catch(() => {});
 });
 </script>
 
