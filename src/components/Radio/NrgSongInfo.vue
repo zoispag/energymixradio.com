@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import { radio, remember, pickAccent } from "@/store";
 
 const streamUrl =
@@ -8,12 +8,20 @@ const streamUrl =
 const interval = ref(null);
 const rawResponse = ref("Loading...");
 const artwork = ref(null);
+const links = computed(() => {
+  const q = encodeURIComponent(rawResponse.value);
+  return [
+    { name: "Spotify", href: `https://open.spotify.com/search/${q}` },
+    { name: "Apple Music", href: `https://music.apple.com/search?term=${q}` },
+    { name: "YouTube", href: `https://www.youtube.com/results?search_query=${q}` },
+  ];
+});
 let lastLookup = "";
 
 watch(rawResponse, (v) => (radio.meta = v));
 watch(artwork, async (v) => {
   radio.artwork = v;
-  radio.accent = (v && (await pickAccent(v))) || "185, 28, 28";
+  radio.accent = (v && (await pickAccent(v))) || "rgb(185 28 28)";
 });
 
 onMounted(() => {
@@ -75,6 +83,18 @@ function fetchArtwork(meta) {
         <div class="text-xs font-bold uppercase tracking-widest text-red-500">Now Playing</div>
         <div class="mt-1 text-sm sm:text-base text-gray-100 leading-snug break-words">{{ rawResponse }}</div>
       </div>
+    </div>
+    <div v-if="artwork || rawResponse !== 'Loading...'" class="mt-3 flex items-center justify-center gap-2 text-xs">
+      <span class="text-gray-500">Find this song:</span>
+      <a
+        v-for="l in links"
+        :key="l.name"
+        :href="l.href"
+        target="_blank"
+        rel="noopener"
+        class="rounded-full border border-white/15 px-3 py-1 text-gray-200 transition hover:border-white/60 hover:text-white"
+        >{{ l.name }}</a
+      >
     </div>
   </div>
 </template>

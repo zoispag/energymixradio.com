@@ -24,15 +24,15 @@ import NrgFooter from "@/components/NrgFooter.vue";
 </template>
 
 <style>
-@property --accent-a {
-  syntax: "<number>";
+@property --accent {
+  syntax: "<color>";
   inherits: true;
-  initial-value: 0.4;
+  initial-value: rgb(185 28 28);
 }
 .glow {
   background:
-    radial-gradient(ellipse at 50% 30%, rgba(var(--accent), 0.45), transparent 60%),
-    radial-gradient(ellipse at 50% 110%, rgba(var(--accent), 0.25), transparent 55%);
-  transition: --accent 1s;
+    radial-gradient(ellipse at 50% 30%, color-mix(in srgb, var(--accent) 45%, transparent), transparent 60%),
+    radial-gradient(ellipse at 50% 110%, color-mix(in srgb, var(--accent) 25%, transparent), transparent 55%);
+  transition: --accent 1.2s ease;
 }
 </style>

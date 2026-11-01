@@ -15,7 +15,7 @@ export const radio = reactive({
   artwork: null,
   playing: false,
   history: load(),
-  accent: "185, 28, 28",
+  accent: "rgb(185 28 28)",
 });
 
 // Average the vivid pixels of the cover to get a background accent colour
@@ -37,7 +37,7 @@ export function pickAccent(src) {
           const weight = (mx - mn) * 1 + 8; // favour saturated pixels
           r += d[i] * weight; g += d[i + 1] * weight; b += d[i + 2] * weight; w += weight;
         }
-        resolve(`${Math.round(r / w)}, ${Math.round(g / w)}, ${Math.round(b / w)}`);
+        resolve(`rgb(${Math.round(r / w)} ${Math.round(g / w)} ${Math.round(b / w)})`);
       } catch (e) {
         resolve(null);
       }
