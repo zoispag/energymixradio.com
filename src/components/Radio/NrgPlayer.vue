@@ -6,6 +6,23 @@ const playerSource = "https://cast.magicstreams.gr/sc/jziwpfyo/stream";
 const audio = ref(null);
 const state = ref("idle"); // idle | loading | playing
 
+const volume = ref(1);
+try {
+  const saved = parseFloat(localStorage.getItem("emr-volume"));
+  if (!Number.isNaN(saved)) volume.value = saved;
+} catch (e) {
+  /* storage unavailable */
+}
+watch(volume, (v) => {
+  if (audio.value) audio.value.volume = v;
+  try {
+    localStorage.setItem("emr-volume", String(v));
+  } catch (e) {
+    /* storage unavailable */
+  }
+});
+onMounted(() => (audio.value.volume = volume.value));
+
 const SITE_TITLE = "EnergyMixRadio";
 
 watch(state, (v) => (radio.playing = v === "playing"));
@@ -127,6 +144,10 @@ function toggle() {
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
       <span v-else class="text-red-400">● On air</span>
     </p>
+    <label v-if="state !== 'idle'" class="mt-4 flex items-center gap-3 text-gray-400">
+      <span aria-hidden="true">{{ volume === 0 ? "🔇" : volume < 0.5 ? "🔉" : "🔊" }}</span>
+      <input v-model.number="volume" :style="{ '--v': volume }" type="range" min="0" max="1" step="0.01" aria-label="Volume" class="vol" />
+    </label>
     <audio
       ref="audio"
       preload="none"
@@ -140,6 +161,31 @@ function toggle() {
 </template>
 
 <style scoped>
+.vol {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 11rem;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(to right, #ef4444 calc(var(--v, 1) * 100%), rgb(255 255 255 / 0.2) 0);
+  outline: none;
+}
+.vol::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 9999px;
+  background: #fff;
+  cursor: pointer;
+}
+.vol::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  border: 0;
+  border-radius: 9999px;
+  background: #fff;
+  cursor: pointer;
+}
 .player-btn {
   background: radial-gradient(circle at 30% 25%, #ff5a4d, #b3001b 70%);
   box-shadow: 0 0 60px 8px rgba(239, 68, 68, 0.45);
