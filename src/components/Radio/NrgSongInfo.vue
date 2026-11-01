@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
-import { radio } from "@/store";
+import { radio, remember } from "@/store";
 
 const streamUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
@@ -45,8 +45,12 @@ function fetchArtwork(meta) {
       if (meta !== lastLookup) return;
       const art = res.results?.[0]?.artworkUrl100;
       artwork.value = art ? art.replace("100x100", "400x400") : null;
+      remember(meta, art ? art.replace("100x100", "200x200") : null);
     })
-    .catch(() => (artwork.value = null));
+    .catch(() => {
+      artwork.value = null;
+      remember(meta, null);
+    });
 }
 </script>
 
