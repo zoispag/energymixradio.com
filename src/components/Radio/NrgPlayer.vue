@@ -127,29 +127,31 @@ function toggle() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center px-4 py-3 lg:pb-2 lg:pt-4">
+  <div class="flex flex-col items-center px-4 py-3 lg:py-3">
     <button
       type="button"
-      class="player-btn relative grid place-items-center h-28 w-28 lg:h-[min(7.5rem,15vh)] lg:w-[min(7.5rem,15vh)] rounded-full focus:outline-hidden focus-visible:ring-4 focus-visible:ring-white/70"
+      class="player-btn inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] focus:outline-hidden focus-visible:ring-4 focus-visible:ring-white/70"
       :class="{ 'is-live': state === 'playing' }"
       :aria-label="state === 'idle' ? 'Play live radio' : 'Stop radio'"
       @click="toggle"
     >
-      <span class="ring ring-1"></span>
-      <span class="ring ring-2"></span>
-      <span class="relative z-10 flex items-end gap-1 h-1/3" v-if="state === 'playing'">
-        <i v-for="n in 5" :key="n" class="eq-bar" :style="{ animationDelay: n * 0.13 + 's' }"></i>
-      </span>
-      <span v-else-if="state === 'loading'" class="relative z-10 h-1/3 w-1/3 rounded-full border-4 border-black/15 border-t-black animate-spin"></span>
-      <svg v-else class="relative z-10 h-1/2 w-1/2 ml-1" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M8 5v14l11-7z" />
+      <span v-if="state === 'loading'" class="h-4 w-4 animate-spin rounded-full border-2 border-black/15 border-t-black"></span>
+      <svg v-else-if="state === 'idle'" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6 4v16l14-8z" />
       </svg>
-    </button>
-    <p class="mt-5 text-xs uppercase tracking-[0.3em] text-gray-400">
-      <span v-if="state === 'idle' && failed" class="text-amber-400">Stream unreachable · tap to retry</span>
-      <span v-else-if="state === 'idle'">Tap to listen live</span>
+      <svg v-else class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <rect x="6" y="6" width="12" height="12" rx="2" />
+      </svg>
+      <span v-if="state === 'idle'">Listen live</span>
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
-      <span v-else class="text-gray-200">● On air · tap to stop</span>
+      <span v-else>On air · Stop</span>
+      <!-- Always-moving bars: signals "audio, click me" without shouting -->
+      <span class="eq" aria-hidden="true">
+        <i v-for="n in 5" :key="n" class="eq-bar" :style="{ animationDelay: -n * 0.23 + 's' }"></i>
+      </span>
+    </button>
+    <p v-if="state === 'idle' && failed" class="mt-3 text-xs uppercase tracking-[0.2em] text-amber-400">
+      Stream unreachable · tap to retry
     </p>
     <label v-if="state !== 'idle'" class="mt-2 flex items-center gap-3 text-gray-400">
       <span aria-hidden="true">{{ volume === 0 ? "🔇" : volume < 0.5 ? "🔉" : "🔊" }}</span>
@@ -195,49 +197,41 @@ function toggle() {
 }
 .player-btn {
   /* Calm, neutral "media player" look: no glowing red CTA that reads like an ad */
-  background: linear-gradient(160deg, #fafafa, #cfd2d8);
+  background: linear-gradient(160deg, #fafafa, #d4d7dd);
   color: #111;
-  box-shadow: 0 10px 30px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.35);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.5), 0 0 0 1px rgb(255 255 255 / 0.35);
   transition: transform 0.2s, box-shadow 0.3s;
 }
 .player-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 8px 26px rgb(0 0 0 / 0.55), 0 0 0 1px rgb(255 255 255 / 0.6);
 }
 .player-btn:active {
   transform: scale(0.97);
 }
-.ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  border: 1.5px solid rgb(255 255 255 / 0.4);
-  opacity: 0;
-}
-.ring-2 {
-  animation-delay: 1.2s;
-}
-/* Only pulse while audio is actually playing */
-.is-live .ring {
-  animation: pulse 2.4s ease-out infinite;
+.eq {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5px;
+  height: 1.1rem;
 }
 .eq-bar {
   display: block;
-  width: 5px;
+  width: 2.5px;
   height: 100%;
-  border-radius: 3px;
-  background: #111;
-  transform-origin: bottom;
+  border-radius: 2px;
+  background: currentColor;
+  transform-origin: center;
   animation: eq 0.9s ease-in-out infinite alternate;
 }
-@keyframes pulse {
-  from { transform: scale(1); opacity: 0.8; }
-  to { transform: scale(1.4); opacity: 0; }
+.is-live .eq-bar {
+  animation-duration: 0.55s;
 }
 @keyframes eq {
-  from { transform: scaleY(0.2); }
+  from { transform: scaleY(0.25); }
   to { transform: scaleY(1); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ring, .eq-bar { animation: none; }
+  .eq-bar { animation: none; transform: scaleY(0.6); }
 }
 </style>

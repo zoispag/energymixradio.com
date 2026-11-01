@@ -48,7 +48,7 @@ test("play button goes on air, shows volume and sleep timer, and stops again", a
   await expect(page).toHaveTitle(/^▶ /);
 
   await page.getByRole("button", { name: "Stop radio" }).click();
-  await expect(page.getByText("Tap to listen live")).toBeVisible();
+  await expect(page.getByText("Listen live")).toBeVisible();
   await expect(page).toHaveTitle("EnergyMixRadio");
 });
 
@@ -58,7 +58,7 @@ test("sleep timer stops the radio when it runs out", async ({ page }) => {
   await page.getByRole("button", { name: "15 min" }).click();
   await expect(page.getByText(/Stopping in/)).toBeVisible();
   await page.clock.runFor(15 * 60 * 1000 + 2000);
-  await expect(page.getByText("Tap to listen live")).toBeVisible();
+  await expect(page.getByText("Listen live")).toBeVisible();
 });
 
 test("spacebar toggles playback", async ({ page }) => {
@@ -66,7 +66,7 @@ test("spacebar toggles playback", async ({ page }) => {
   await page.keyboard.press("Space");
   await expect(page.getByText("On air")).toBeVisible();
   await page.keyboard.press("Space");
-  await expect(page.getByText("Tap to listen live")).toBeVisible();
+  await expect(page.getByText("Listen live")).toBeVisible();
 });
 
 test("favourites survive a reload", async ({ page }) => {

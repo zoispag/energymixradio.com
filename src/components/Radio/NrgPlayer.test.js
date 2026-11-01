@@ -14,7 +14,7 @@ describe("NrgPlayer", () => {
 
   it("starts idle with a play prompt", () => {
     const w = mount(NrgPlayer);
-    expect(w.text()).toContain("Tap to listen live");
+    expect(w.text()).toContain("Listen live");
     expect(w.find("button").attributes("aria-label")).toBe("Play live radio");
   });
 
@@ -30,7 +30,7 @@ describe("NrgPlayer", () => {
     expect(w.find("input[type=range]").exists()).toBe(true);
 
     await w.find("button").trigger("click");
-    expect(w.text()).toContain("Tap to listen live");
+    expect(w.text()).toContain("Listen live");
     expect(radio.playing).toBe(false);
   });
 
