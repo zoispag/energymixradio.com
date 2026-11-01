@@ -33,3 +33,25 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Lint
+
+```sh
+npm run lint
+```
+
+### Unit / smoke tests (Vitest)
+
+```sh
+npm test
+```
+
+### End-to-end tests (Playwright)
+
+Builds the site, serves it with `vite preview` and runs against your locally installed Chrome. The stream and the iTunes artwork lookup are mocked, so no network or audio is needed.
+
+```sh
+npm run test:e2e
+```
+
+Requires Node 24 (see `.nvmrc`).
