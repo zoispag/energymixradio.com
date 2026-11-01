@@ -130,22 +130,22 @@ function toggle() {
   <div class="flex flex-col items-center px-4 py-3 lg:pb-2 lg:pt-4">
     <button
       type="button"
-      class="player-btn relative grid place-items-center h-40 w-40 lg:h-[min(11rem,22vh)] lg:w-[min(11rem,22vh)] rounded-full text-white focus:outline-hidden focus-visible:ring-4 focus-visible:ring-red-300"
+      class="player-btn relative grid place-items-center h-28 w-28 lg:h-[min(7.5rem,15vh)] lg:w-[min(7.5rem,15vh)] rounded-full text-white focus:outline-hidden focus-visible:ring-4 focus-visible:ring-red-300"
       :class="{ 'is-live': state === 'playing' }"
       :aria-label="state === 'idle' ? 'Play live radio' : 'Stop radio'"
       @click="toggle"
     >
       <span class="ring ring-1"></span>
       <span class="ring ring-2"></span>
-      <span class="relative z-10 flex items-end gap-1.5 h-12" v-if="state === 'playing'">
+      <span class="relative z-10 flex items-end gap-1 h-1/3" v-if="state === 'playing'">
         <i v-for="n in 5" :key="n" class="eq-bar" :style="{ animationDelay: n * 0.13 + 's' }"></i>
       </span>
-      <span v-else-if="state === 'loading'" class="relative z-10 h-10 w-10 rounded-full border-4 border-white/30 border-t-white animate-spin"></span>
-      <svg v-else class="relative z-10 h-16 w-16 ml-2" viewBox="0 0 24 24" fill="currentColor">
+      <span v-else-if="state === 'loading'" class="relative z-10 h-1/3 w-1/3 rounded-full border-4 border-white/30 border-t-white animate-spin"></span>
+      <svg v-else class="relative z-10 h-1/2 w-1/2 ml-1" viewBox="0 0 24 24" fill="currentColor">
         <path d="M8 5v14l11-7z" />
       </svg>
     </button>
-    <p class="mt-3 text-xs uppercase tracking-[0.3em] text-gray-400">
+    <p class="mt-5 text-xs uppercase tracking-[0.3em] text-gray-400">
       <span v-if="state === 'idle' && failed" class="text-amber-400">Stream unreachable · tap to retry</span>
       <span v-else-if="state === 'idle'">Tap to listen live</span>
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
@@ -219,9 +219,9 @@ function toggle() {
 }
 .eq-bar {
   display: block;
-  width: 8px;
+  width: 5px;
   height: 100%;
-  border-radius: 4px;
+  border-radius: 3px;
   background: #fff;
   transform-origin: bottom;
   animation: eq 0.9s ease-in-out infinite alternate;
