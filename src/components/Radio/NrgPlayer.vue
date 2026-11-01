@@ -42,18 +42,53 @@ function onKey(e) {
 onMounted(() => window.addEventListener("keydown", onKey));
 onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
 
-function toggle() {
+let wantPlay = false;
+let retries = 0;
+let retryTimer = null;
+const reconnecting = ref(false);
+
+function connect() {
   const el = audio.value;
+  // Reload the source so we always join the live edge, not a stale buffer
+  el.src = playerSource;
+  el.play().catch(() => onDrop());
+}
+
+// Mobile networks drop live streams constantly; quietly rejoin instead of going silent
+function onDrop() {
+  if (!wantPlay) return;
+  if (retries >= 6) return stop();
+  reconnecting.value = true;
+  state.value = "loading";
+  clearTimeout(retryTimer);
+  retryTimer = setTimeout(connect, Math.min(1000 * 2 ** retries++, 8000));
+}
+
+function onPlaying() {
+  retries = 0;
+  reconnecting.value = false;
+  state.value = "playing";
+}
+
+function stop() {
+  wantPlay = false;
+  retries = 0;
+  reconnecting.value = false;
+  clearTimeout(retryTimer);
+  const el = audio.value;
+  el.pause();
+  el.removeAttribute("src");
+  el.load();
+  state.value = "idle";
+}
+
+function toggle() {
   if (state.value === "idle") {
+    wantPlay = true;
     state.value = "loading";
-    // Reload the source so we always join the live edge, not a stale buffer
-    el.src = playerSource;
-    el.play().catch(() => (state.value = "idle"));
+    connect();
   } else {
-    el.pause();
-    el.removeAttribute("src");
-    el.load();
-    state.value = "idle";
+    stop();
   }
 }
 </script>
@@ -79,10 +114,17 @@ function toggle() {
     </button>
     <p class="mt-5 text-xs uppercase tracking-[0.3em] text-gray-400">
       <span v-if="state === 'idle'">Tap to listen live</span>
-      <span v-else-if="state === 'loading'">Tuning in…</span>
+      <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
       <span v-else class="text-red-400">● On air</span>
     </p>
-    <audio ref="audio" preload="none" @playing="state = 'playing'" @error="state = 'idle'"></audio>
+    <audio
+      ref="audio"
+      preload="none"
+      @playing="onPlaying"
+      @error="onDrop"
+      @stalled="onDrop"
+      @ended="onDrop"
+    ></audio>
   </div>
 </template>
 
