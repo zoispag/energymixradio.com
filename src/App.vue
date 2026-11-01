@@ -4,6 +4,7 @@ import NgrLogo from "@/components/NgrLogo.vue";
 import NrgPlayer from "@/components/Radio/NrgPlayer.vue";
 import NrgSongInfo from "@/components/Radio/NrgSongInfo.vue";
 import NrgSocial from "@/components/Social/NrgSocial.vue";
+import NrgFavorites from "@/components/Radio/NrgFavorites.vue";
 import NrgHistory from "@/components/Radio/NrgHistory.vue";
 import NrgBackdrop from "@/components/Radio/NrgBackdrop.vue";
 import NrgEqualizer from "@/components/Radio/NrgEqualizer.vue";
@@ -22,6 +23,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
     <NrgSleepTimer />
     <NrgSongInfo />
     <NrgHistory />
+    <NrgFavorites />
     <NrgInstall />
     <NrgShare />
     <NrgSocial />
