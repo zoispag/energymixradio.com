@@ -5,6 +5,7 @@ const TRACKS = [
   "Above & Beyond - Sun & Moon",
   "Armin van Buuren - Blah Blah Blah",
   "Paul Thomas & Maze 28 - Abundance (Extended Mix)",
+  ...Array.from({ length: 8 }, (_, i) => `Artist ${i + 5} - Track ${i + 5}`),
 ];
 
 test.beforeEach(async ({ page }) => {
@@ -60,6 +61,24 @@ test("spacebar toggles playback", async ({ page }) => {
   await expect(page.getByText("Listen live")).toBeVisible();
 });
 
+test("recently played keeps 9 earlier tracks, scrollable without a visible scrollbar", async ({ page }) => {
+  await page.goto("/");
+  for (let i = 0; i < 14; i++) await page.clock.runFor(2600);
+  const list = page.getByRole("region", { name: /Recently played tracks/ });
+  await expect(list.getByRole("listitem")).toHaveCount(9);
+  const m = await list.evaluate((el) => ({
+    scrollable: el.scrollHeight > el.clientHeight,
+    // no scrollbar gutter: layout width equals visible width
+    gutter: el.offsetWidth - el.clientWidth,
+  }));
+  expect(m.scrollable).toBe(true);
+  expect(m.gutter).toBe(0);
+  await list.focus();
+  await page.keyboard.press("End");
+  await expect(page.getByText("Artist 5 - Track 5").first()).toBeInViewport();
+  expect(await list.evaluate((el) => el.scrollTop)).toBeGreaterThan(0);
+});
+
 test("favourites survive a reload", async ({ page }) => {
   await page.goto("/");
   await page.clock.runFor(100);
@@ -84,9 +103,7 @@ for (const size of [
 
     // Fill the worst case: playing (volume) with a full history
     await page.getByRole("button", { name: "Listen live" }).click();
-    await page.clock.runFor(5100);
-    await page.clock.runFor(5100);
-    await page.clock.runFor(5100);
+    for (let i = 0; i < 14; i++) await page.clock.runFor(2600);
     await expect(page.getByText("Recently played")).toBeVisible();
     await page.getByRole("button", { name: /Save .* to favourites/ }).first().click();
 

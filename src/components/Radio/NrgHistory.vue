@@ -3,7 +3,7 @@ import { computed } from "vue";
 import { radio, toggleFavorite } from "@/store";
 
 // The first entry is the track playing right now
-const earlier = computed(() => radio.history.slice(1, 4));
+const earlier = computed(() => radio.history.slice(1, 10));
 
 function ago(ts) {
   const m = Math.round((Date.now() - ts) / 60000);
@@ -16,6 +16,14 @@ function ago(ts) {
 <template>
   <section v-if="earlier.length" class="w-full max-w-sm px-2">
     <h2 class="mb-2 text-xs font-bold uppercase tracking-widest text-gray-400">Recently played</h2>
+    <!-- Three rows are visible; the rest scroll, with a fade (not a scrollbar) as the hint -->
+    <div
+      class="history-scroll -ml-2 max-h-[8.4rem] overflow-y-auto pl-2 focus-visible:outline-2 focus-visible:outline-white/60"
+      :class="{ 'has-more': earlier.length > 3 }"
+      :tabindex="earlier.length > 3 ? 0 : undefined"
+      :role="earlier.length > 3 ? 'region' : undefined"
+      :aria-label="earlier.length > 3 ? 'Recently played tracks, scrollable' : undefined"
+    >
     <ol class="relative space-y-1.5 border-l border-red-900/60 pl-4">
       <li v-for="t in earlier" :key="t.at" class="relative flex items-center gap-3">
         <span class="absolute -left-[21px] h-2 w-2 rounded-full bg-red-600" aria-hidden="true"></span>
@@ -37,5 +45,19 @@ function ago(ts) {
         </button>
       </li>
     </ol>
+    </div>
   </section>
 </template>
+
+<style scoped>
+.history-scroll {
+  scrollbar-width: none;
+}
+.history-scroll::-webkit-scrollbar {
+  display: none;
+}
+.history-scroll.has-more {
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 1.5rem), transparent);
+}
+</style>

@@ -16,11 +16,11 @@ describe("store", () => {
     expect(radio.history.map((t) => t.meta)).toEqual(["A - One", "B - Two"]);
   });
 
-  it("caps history at 8 entries and persists it", async () => {
+  it("caps history at 10 entries (now playing + 9 earlier) and persists it", async () => {
     const { radio, remember } = await freshStore();
     for (let i = 0; i < 12; i++) remember(`Artist - Track ${i}`, null);
-    expect(radio.history).toHaveLength(8);
-    expect(JSON.parse(localStorage.getItem("emr-history"))).toHaveLength(8);
+    expect(radio.history).toHaveLength(10);
+    expect(JSON.parse(localStorage.getItem("emr-history"))).toHaveLength(10);
   });
 
   it("ignores the loading placeholder", async () => {

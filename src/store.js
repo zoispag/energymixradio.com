@@ -61,7 +61,7 @@ export function remember(meta, art) {
   if (!meta || meta === "Loading...") return;
   const list = radio.history.filter((t) => t.meta !== meta);
   list.unshift({ meta, art, at: Date.now() });
-  radio.history = list.slice(0, 8);
+  radio.history = list.slice(0, 10);
   try {
     localStorage.setItem(KEY, JSON.stringify(radio.history));
   } catch {
