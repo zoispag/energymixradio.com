@@ -3,3 +3,11 @@
 body {
   background-color: black;
 }
+
+/* On laptop-and-up screens the whole UI (all rem-based) scales with the viewport height,
+   growing slower than the viewport so everything still fits without scrolling. */
+@media (min-width: 1024px) {
+  html {
+    font-size: clamp(16px, calc(1.2vh + 10px), 24px);
+  }
+}

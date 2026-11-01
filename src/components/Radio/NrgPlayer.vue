@@ -127,7 +127,7 @@ function toggle() {
 </script>
 
 <template>
-  <div class="flex flex-col items-center px-4 py-3 lg:py-2">
+  <div class="flex flex-col items-center px-4 py-3 lg:pb-2 lg:pt-4">
     <button
       type="button"
       class="player-btn relative grid place-items-center h-40 w-40 lg:h-[min(11rem,22vh)] lg:w-[min(11rem,22vh)] rounded-full text-white focus:outline-hidden focus-visible:ring-4 focus-visible:ring-red-300"
@@ -228,7 +228,7 @@ function toggle() {
 }
 @keyframes pulse {
   from { transform: scale(1); opacity: 0.8; }
-  to { transform: scale(1.7); opacity: 0; }
+  to { transform: scale(1.4); opacity: 0; }
 }
 @keyframes eq {
   from { transform: scaleY(0.2); }

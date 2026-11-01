@@ -79,10 +79,12 @@ test("favourites survive a reload", async ({ page }) => {
 });
 
 for (const size of [
+  { width: 1280, height: 520 },
   { width: 1280, height: 600 },
   { width: 1366, height: 650 },
   { width: 1440, height: 700 },
   { width: 1920, height: 900 },
+  { width: 1840, height: 1000 },
 ]) {
   test(`fits without scrolling on a ${size.width}x${size.height} laptop, even while playing`, async ({ page }) => {
     await page.setViewportSize(size);
