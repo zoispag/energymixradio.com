@@ -25,7 +25,6 @@ export const radio = reactive({
   history: load(),
   favorites: loadFavs(),
   accent: "rgb(185 28 28)",
-  stopRequested: 0,
   focusMode: false,
 });
 

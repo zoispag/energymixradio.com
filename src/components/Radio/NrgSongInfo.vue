@@ -26,7 +26,7 @@ watch(artwork, async (v) => {
 
 onMounted(() => {
   fetchSong();
-  interval.value = setInterval(fetchSong, 5000);
+  interval.value = setInterval(fetchSong, 2500);
 });
 
 onBeforeUnmount(() => {

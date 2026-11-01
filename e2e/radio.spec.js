@@ -39,26 +39,17 @@ test("shows what's playing and offers the core actions", async ({ page }) => {
   await expect(page.getByText("Request a song")).toHaveCount(0);
 });
 
-test("play button goes on air, shows volume and sleep timer, and stops again", async ({ page }) => {
+test("play button goes on air, shows volume, and stops again", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("button", { name: "Listen live" }).click();
   await expect(page.getByText("On air").first()).toBeVisible();
   await expect(page.getByLabel("Volume")).toBeVisible();
-  await expect(page.getByRole("button", { name: /15 min/ })).toBeVisible();
+  await expect(page.getByText(/sleep timer/i)).toHaveCount(0);
   await expect(page).toHaveTitle(/^▶ /);
 
   await page.getByRole("button", { name: /Stop/ }).click();
   await expect(page.getByText("Listen live")).toBeVisible();
   await expect(page).toHaveTitle("EnergyMixRadio");
-});
-
-test("sleep timer stops the radio when it runs out", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("button", { name: "Listen live" }).click();
-  await page.getByRole("button", { name: /15 min/ }).click();
-  await expect(page.getByText(/Stopping in/)).toBeVisible();
-  await page.clock.runFor(15 * 60 * 1000 + 2000);
-  await expect(page.getByText("Listen live")).toBeVisible();
 });
 
 test("spacebar toggles playback", async ({ page }) => {
@@ -91,7 +82,7 @@ for (const size of [
     await page.goto("/");
     await page.clock.runFor(100);
 
-    // Fill the worst case: playing (volume + sleep timer) with a full history
+    // Fill the worst case: playing (volume) with a full history
     await page.getByRole("button", { name: "Listen live" }).click();
     await page.clock.runFor(5100);
     await page.clock.runFor(5100);
@@ -106,7 +97,7 @@ for (const size of [
     expect(overflow.scroll).toBeLessThanOrEqual(0);
     expect(overflow.sideways).toBeLessThanOrEqual(0);
     // Everything important is actually inside the viewport
-    for (const name of [/Share/, /Facebook/, /Follow/]) {
+    for (const name of [/Share/, /Facebook/, /Instagram/, /Follow/]) {
       const box = await page.getByRole("link", { name }).or(page.getByRole("button", { name })).first().boundingBox();
       expect(box.y + box.height).toBeLessThanOrEqual(size.height);
     }
