@@ -13,7 +13,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
 </script>
 
 <template>
-  <div class="grid place-items-center antialiased px-2 py-12 min-h-screen glow" :style="{ '--accent': radio.accent }">
+  <div class="grid grid-cols-[minmax(0,1fr)] place-items-center antialiased px-4 py-10 min-h-screen overflow-x-hidden glow" :style="{ '--accent': radio.accent }">
     <NgrLogo />
     <NrgPlayer />
     <NrgSleepTimer />
