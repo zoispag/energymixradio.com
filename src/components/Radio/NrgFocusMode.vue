@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
       >
         Close · Esc
       </button>
-      <div class="text-xs uppercase tracking-[0.3em] text-gray-500" aria-hidden="true">energymixradio.com</div>
+      <div class="text-xs tracking-[0.2em] text-gray-500" aria-hidden="true">www.EnergyMixRadio.com</div>
     </div>
   </Transition>
 </template>
