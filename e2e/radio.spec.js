@@ -151,3 +151,19 @@ test("tells the listener when the stream is unreachable, then recovers on retry"
   await page.getByRole("button", { name: "Listen live" }).click();
   await expect(page.getByText("On air").first()).toBeVisible();
 });
+
+test("iPhone visitors are pointed at the browser's own share menu for Add to Home Screen", async ({ browser }) => {
+  const context = await browser.newContext({
+    userAgent:
+      "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/130.0 Mobile/15E148 Safari/604.1",
+    viewport: { width: 390, height: 844 },
+  });
+  const page = await context.newPage();
+  await page.route("**/rpc.php**", (route) => route.fulfill({ json: { data: [{ rawmeta: "A - B" }] } }));
+  await page.route("**/itunes.apple.com/**", (route) => route.fulfill({ json: { results: [] } }));
+  await page.goto("/");
+  await page.getByRole("button", { name: "Install app" }).click();
+  await expect(page.getByText(/browser's own share button/)).toBeVisible();
+  await expect(page.getByText(/Add to Home Screen/)).toBeVisible();
+  await context.close();
+});

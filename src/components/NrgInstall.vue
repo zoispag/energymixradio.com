@@ -36,8 +36,9 @@ async function install() {
     >
       Install app
     </button>
-    <p v-if="showIosHint" class="mt-2 text-xs text-gray-400">
-      Tap <span class="font-bold">Share</span>, then <span class="font-bold">Add to Home Screen</span>.
+    <p v-if="showIosHint" class="mt-2 max-w-xs text-xs text-gray-400">
+      Use your <span class="font-bold">browser's own share button</span> (in the address bar or toolbar, not the
+      Share button on this page), then choose <span class="font-bold">Add to Home Screen</span>.
     </p>
   </div>
 </template>
