@@ -9,7 +9,6 @@ import NrgHistory from "@/components/Radio/NrgHistory.vue";
 import NrgBackdrop from "@/components/Radio/NrgBackdrop.vue";
 import NrgFocusMode from "@/components/Radio/NrgFocusMode.vue";
 import NrgEqualizer from "@/components/Radio/NrgEqualizer.vue";
-import NrgSleepTimer from "@/components/Radio/NrgSleepTimer.vue";
 import NrgInstall from "@/components/NrgInstall.vue";
 import NrgShare from "@/components/NrgShare.vue";
 import NrgFooter from "@/components/NrgFooter.vue";
@@ -28,7 +27,6 @@ import NrgFooter from "@/components/NrgFooter.vue";
       <section class="flex w-full flex-col items-center">
         <NgrLogo />
         <NrgPlayer />
-        <NrgSleepTimer />
       </section>
       <section class="flex w-full flex-col items-center [&>*]:mb-0! [&>*]:mt-0! gap-3">
         <NrgSongInfo />

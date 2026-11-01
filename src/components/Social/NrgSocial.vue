@@ -10,6 +10,15 @@
       <span>Facebook<span class="sr-only"> (opens in a new tab)</span></span>
     </a>
     <a
+      href="https://www.instagram.com/energymixradio/"
+      target="_blank"
+      rel="noopener"
+      class="social"
+    >
+      <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" /></svg>
+      <span>Instagram<span class="sr-only"> (opens in a new tab)</span></span>
+    </a>
+    <a
       href="https://twitter.com/EnergyMixRadio"
       target="_blank"
       rel="noopener"

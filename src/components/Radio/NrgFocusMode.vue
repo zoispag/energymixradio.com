@@ -92,21 +92,22 @@ onBeforeUnmount(() => {
   <Transition name="focus">
     <div
       v-if="radio.focusMode"
-      class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-6 bg-black/85 px-6 text-center backdrop-blur-2xl"
+      class="fixed inset-0 z-50 flex flex-col items-center justify-center gap-[2.5vh] bg-black/85 px-6 text-center backdrop-blur-2xl"
       role="dialog"
       aria-modal="true"
       aria-label="Focus mode"
     >
+      <img src="@/assets/logo.webp" alt="EnergyMixRadio" class="h-[11vh] w-auto" />
       <img
         v-if="radio.artwork"
         :src="radio.artwork"
         :alt="`Cover art for ${radio.meta}`"
-        class="aspect-square w-[min(60vh,80vw)] rounded-2xl object-cover shadow-2xl shadow-black"
+        class="aspect-square w-[min(48vh,80vw)] rounded-2xl object-cover shadow-2xl shadow-black"
         :style="{ boxShadow: `0 0 120px -20px ${radio.accent}` }"
       />
       <div
         v-else
-        class="grid aspect-square w-[min(60vh,80vw)] place-items-center rounded-2xl bg-linear-to-br from-red-700 to-black text-8xl text-white/60"
+        class="grid aspect-square w-[min(48vh,80vw)] place-items-center rounded-2xl bg-linear-to-br from-red-700 to-black text-8xl text-white/60"
         aria-hidden="true"
       >
         ♪
@@ -126,6 +127,7 @@ onBeforeUnmount(() => {
       >
         Close · Esc
       </button>
+      <div class="text-xs uppercase tracking-[0.3em] text-gray-500" aria-hidden="true">energymixradio.com</div>
     </div>
   </Transition>
 </template>

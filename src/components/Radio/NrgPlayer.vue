@@ -26,12 +26,6 @@ onMounted(() => (audio.value.volume = volume.value));
 const SITE_TITLE = "EnergyMixRadio";
 
 watch(state, (v) => (radio.playing = v === "playing"));
-// Sleep timer asks the player to stop
-watch(
-  () => radio.stopRequested,
-  () => state.value !== "idle" && toggle()
-);
-
 // Tab title + lock-screen / media-key controls so listening survives a locked phone
 watch(
   () => [radio.playing, radio.meta, radio.artwork],
