@@ -1,9 +1,33 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { radio } from "@/store";
 
 const playerSource = "https://cast.magicstreams.gr/sc/jziwpfyo/stream";
 const audio = ref(null);
 const state = ref("idle"); // idle | loading | playing
+
+const SITE_TITLE = "EnergyMixRadio";
+
+watch(state, (v) => (radio.playing = v === "playing"));
+
+// Tab title + lock-screen / media-key controls so listening survives a locked phone
+watch(
+  () => [radio.playing, radio.meta, radio.artwork],
+  ([playing, meta, artwork]) => {
+    document.title = playing && meta ? `▶ ${meta} · ${SITE_TITLE}` : SITE_TITLE;
+    if (!("mediaSession" in navigator) || !playing) return;
+    const [artist, ...rest] = meta.split(" - ");
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: rest.length ? rest.join(" - ") : meta,
+      artist: rest.length ? artist : SITE_TITLE,
+      album: SITE_TITLE,
+      artwork: artwork ? [{ src: artwork, sizes: "400x400", type: "image/jpeg" }] : [],
+    });
+    navigator.mediaSession.playbackState = "playing";
+    navigator.mediaSession.setActionHandler("pause", toggle);
+    navigator.mediaSession.setActionHandler("stop", toggle);
+  }
+);
 
 function toggle() {
   const el = audio.value;

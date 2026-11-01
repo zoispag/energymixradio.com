@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
+import { radio } from "@/store";
 
 const streamUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
@@ -8,6 +9,9 @@ const interval = ref(null);
 const rawResponse = ref("Loading...");
 const artwork = ref(null);
 let lastLookup = "";
+
+watch(rawResponse, (v) => (radio.meta = v));
+watch(artwork, (v) => (radio.artwork = v));
 
 onMounted(() => {
   fetchSong();

@@ -4,6 +4,7 @@ import NrgPlayer from "@/components/Radio/NrgPlayer.vue";
 import NrgSongInfo from "@/components/Radio/NrgSongInfo.vue";
 import Facebook from "@/components/Social/NrgFacebook.vue";
 import Twitter from "@/components/Social/NrgTwitter.vue";
+import NrgShare from "@/components/NrgShare.vue";
 import NrgFooter from "@/components/NrgFooter.vue";
 </script>
 
@@ -12,6 +13,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
     <NgrLogo />
     <NrgPlayer />
     <NrgSongInfo />
+    <NrgShare />
     <Facebook />
     <Twitter />
     <NrgFooter />
