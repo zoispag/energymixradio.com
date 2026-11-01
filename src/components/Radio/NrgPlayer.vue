@@ -9,6 +9,11 @@ const state = ref("idle"); // idle | loading | playing
 const SITE_TITLE = "EnergyMixRadio";
 
 watch(state, (v) => (radio.playing = v === "playing"));
+// Sleep timer asks the player to stop
+watch(
+  () => radio.stopRequested,
+  () => state.value !== "idle" && toggle()
+);
 
 // Tab title + lock-screen / media-key controls so listening survives a locked phone
 watch(

@@ -16,6 +16,7 @@ export const radio = reactive({
   playing: false,
   history: load(),
   accent: "rgb(185 28 28)",
+  stopRequested: 0,
 });
 
 // Average the vivid pixels of the cover to get a background accent colour

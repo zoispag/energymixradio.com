@@ -6,6 +6,7 @@ import NrgSongInfo from "@/components/Radio/NrgSongInfo.vue";
 import Facebook from "@/components/Social/NrgFacebook.vue";
 import Twitter from "@/components/Social/NrgTwitter.vue";
 import NrgHistory from "@/components/Radio/NrgHistory.vue";
+import NrgSleepTimer from "@/components/Radio/NrgSleepTimer.vue";
 import NrgInstall from "@/components/NrgInstall.vue";
 import NrgShare from "@/components/NrgShare.vue";
 import NrgFooter from "@/components/NrgFooter.vue";
@@ -15,6 +16,7 @@ import NrgFooter from "@/components/NrgFooter.vue";
   <div class="grid place-items-center antialiased px-2 py-12 min-h-screen glow" :style="{ '--accent': radio.accent }">
     <NgrLogo />
     <NrgPlayer />
+    <NrgSleepTimer />
     <NrgSongInfo />
     <NrgHistory />
     <NrgInstall />
