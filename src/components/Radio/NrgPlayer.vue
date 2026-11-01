@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { radio } from "@/store";
 
 const playerSource = "https://cast.magicstreams.gr/sc/jziwpfyo/stream";
@@ -33,6 +33,14 @@ watch(
     navigator.mediaSession.setActionHandler("stop", toggle);
   }
 );
+
+function onKey(e) {
+  if (e.code !== "Space" || /^(INPUT|TEXTAREA|BUTTON|A)$/.test(e.target.tagName)) return;
+  e.preventDefault();
+  toggle();
+}
+onMounted(() => window.addEventListener("keydown", onKey));
+onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
 
 function toggle() {
   const el = audio.value;
