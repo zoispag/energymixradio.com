@@ -54,7 +54,7 @@ onBeforeUnmount(() => clearInterval(tick));
         class="rounded-full border border-white/15 px-3 py-1 text-gray-200 transition hover:border-white/60 hover:text-white"
         @click="start(m)"
       >
-        {{ m }} min
+        {{ m }} min<span class="sr-only"> sleep timer</span>
       </button>
     </template>
   </div>

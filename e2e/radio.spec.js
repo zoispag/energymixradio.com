@@ -32,8 +32,8 @@ test.beforeEach(async ({ page }) => {
 test("shows what's playing and offers the core actions", async ({ page }) => {
   await page.goto("/");
   await page.clock.runFor(100);
-  await expect(page.getByText(TRACKS[0])).toBeVisible();
-  await expect(page.getByRole("button", { name: "Play live radio" })).toBeVisible();
+  await expect(page.getByText(TRACKS[0]).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: "Listen live" })).toBeVisible();
   await expect(page.getByRole("button", { name: /Share/ })).toBeVisible();
   await expect(page.getByRole("link", { name: "Spotify" })).toBeVisible();
   await expect(page.getByText("Request a song")).toHaveCount(0);
@@ -41,21 +41,21 @@ test("shows what's playing and offers the core actions", async ({ page }) => {
 
 test("play button goes on air, shows volume and sleep timer, and stops again", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Play live radio" }).click();
-  await expect(page.getByText("On air")).toBeVisible();
+  await page.getByRole("button", { name: "Listen live" }).click();
+  await expect(page.getByText("On air").first()).toBeVisible();
   await expect(page.getByLabel("Volume")).toBeVisible();
-  await expect(page.getByRole("button", { name: "15 min" })).toBeVisible();
+  await expect(page.getByRole("button", { name: /15 min/ })).toBeVisible();
   await expect(page).toHaveTitle(/^▶ /);
 
-  await page.getByRole("button", { name: "Stop radio" }).click();
+  await page.getByRole("button", { name: /Stop/ }).click();
   await expect(page.getByText("Listen live")).toBeVisible();
   await expect(page).toHaveTitle("EnergyMixRadio");
 });
 
 test("sleep timer stops the radio when it runs out", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Play live radio" }).click();
-  await page.getByRole("button", { name: "15 min" }).click();
+  await page.getByRole("button", { name: "Listen live" }).click();
+  await page.getByRole("button", { name: /15 min/ }).click();
   await expect(page.getByText(/Stopping in/)).toBeVisible();
   await page.clock.runFor(15 * 60 * 1000 + 2000);
   await expect(page.getByText("Listen live")).toBeVisible();
@@ -64,7 +64,7 @@ test("sleep timer stops the radio when it runs out", async ({ page }) => {
 test("spacebar toggles playback", async ({ page }) => {
   await page.goto("/");
   await page.keyboard.press("Space");
-  await expect(page.getByText("On air")).toBeVisible();
+  await expect(page.getByText("On air").first()).toBeVisible();
   await page.keyboard.press("Space");
   await expect(page.getByText("Listen live")).toBeVisible();
 });
@@ -72,7 +72,7 @@ test("spacebar toggles playback", async ({ page }) => {
 test("favourites survive a reload", async ({ page }) => {
   await page.goto("/");
   await page.clock.runFor(100);
-  await page.getByRole("button", { name: "Save to favourites" }).first().click();
+  await page.getByRole("button", { name: /Save .* to favourites/ }).first().click();
   await expect(page.getByText(/Your favourites \(1\)/)).toBeVisible();
   await page.reload();
   await expect(page.getByText(/Your favourites \(1\)/)).toBeVisible();
@@ -92,12 +92,12 @@ for (const size of [
     await page.clock.runFor(100);
 
     // Fill the worst case: playing (volume + sleep timer) with a full history
-    await page.getByRole("button", { name: "Play live radio" }).click();
+    await page.getByRole("button", { name: "Listen live" }).click();
     await page.clock.runFor(5100);
     await page.clock.runFor(5100);
     await page.clock.runFor(5100);
     await expect(page.getByText("Recently played")).toBeVisible();
-    await page.getByRole("button", { name: "Save to favourites" }).first().click();
+    await page.getByRole("button", { name: /Save .* to favourites/ }).first().click();
 
     const overflow = await page.evaluate(() => ({
       scroll: document.documentElement.scrollHeight - window.innerHeight,
@@ -106,7 +106,7 @@ for (const size of [
     expect(overflow.scroll).toBeLessThanOrEqual(0);
     expect(overflow.sideways).toBeLessThanOrEqual(0);
     // Everything important is actually inside the viewport
-    for (const name of [/Share/, /on Facebook/, /on X/]) {
+    for (const name of [/Share/, /Facebook/, /Follow/]) {
       const box = await page.getByRole("link", { name }).or(page.getByRole("button", { name })).first().boundingBox();
       expect(box.y + box.height).toBeLessThanOrEqual(size.height);
     }
@@ -119,7 +119,7 @@ test("stays usable on a phone (scrolls vertically, never sideways)", async ({ pa
   await page.clock.runFor(100);
   const sideways = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(sideways).toBeLessThanOrEqual(0);
-  await expect(page.getByRole("button", { name: "Play live radio" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Listen live" })).toBeVisible();
 });
 
 test("focus mode opens full-screen now-playing and closes with Escape", async ({ page }) => {
@@ -143,11 +143,11 @@ test("tells the listener when the stream is unreachable, then recovers on retry"
     };
   });
   await page.goto("/");
-  await page.getByRole("button", { name: "Play live radio" }).click();
+  await page.getByRole("button", { name: "Listen live" }).click();
   await page.clock.runFor(60_000);
-  await expect(page.getByText("Stream unreachable")).toBeVisible();
+  await expect(page.getByText("Stream unreachable").first()).toBeVisible();
 
   await page.evaluate(() => (window.__fail = false));
-  await page.getByRole("button", { name: "Play live radio" }).click();
-  await expect(page.getByText("On air")).toBeVisible();
+  await page.getByRole("button", { name: "Listen live" }).click();
+  await expect(page.getByText("On air").first()).toBeVisible();
 });

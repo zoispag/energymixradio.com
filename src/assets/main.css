@@ -4,6 +4,23 @@ body {
   background-color: black;
 }
 
+/* Visible keyboard focus on every interactive element */
+:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Respect the OS "reduce motion" setting everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* On laptop-and-up screens the whole UI (all rem-based) scales with the viewport height,
    growing slower than the viewport so everything still fits without scrolling. */
 @media (min-width: 1024px) {

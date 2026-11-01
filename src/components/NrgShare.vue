@@ -35,7 +35,7 @@ async function share() {
       class="rounded-full border border-white/20 px-5 py-2 text-xs uppercase tracking-widest text-gray-200 transition hover:border-red-500 hover:text-white"
       @click="share"
     >
-      {{ copied ? "Link copied ✓" : "↗ Share" }}
+      <span aria-hidden="true">{{ copied ? "✓" : "↗" }}</span> {{ copied ? "Link copied" : "Share" }}
     </button>
   </div>
 </template>

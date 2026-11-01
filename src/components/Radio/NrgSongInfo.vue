@@ -67,6 +67,8 @@ function fetchArtwork(meta) {
 
 <template>
   <div class="relative w-full max-w-sm px-2">
+    <!-- Announce track changes to screen readers without moving focus -->
+    <p class="sr-only" role="status">{{ rawResponse === "Loading..." ? "" : `Now playing: ${rawResponse}` }}</p>
     <img
       v-if="artwork"
       :key="`bg-${artwork}`"
@@ -76,8 +78,8 @@ function fetchArtwork(meta) {
     />
     <div class="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur">
       <div class="h-20 w-20 shrink-0 overflow-hidden rounded-xl bg-linear-to-br from-red-700 to-black">
-        <img v-if="artwork" :key="artwork" :src="artwork" alt="Album cover" class="h-full w-full object-cover art-in" />
-        <div v-else class="grid h-full w-full place-items-center text-3xl text-white/70">♪</div>
+        <img v-if="artwork" :key="artwork" :src="artwork" :alt="`Cover art for ${rawResponse}`" class="h-full w-full object-cover art-in" />
+        <div v-else class="grid h-full w-full place-items-center text-3xl text-white/70" aria-hidden="true">♪</div>
       </div>
       <div class="min-w-0 flex-1 text-left">
         <div class="text-xs font-bold uppercase tracking-widest text-red-500">Now Playing</div>
@@ -85,16 +87,17 @@ function fetchArtwork(meta) {
       </div>
       <button
         type="button"
-        class="heart shrink-0 self-start p-1 text-2xl leading-none transition hover:scale-110"
-        :class="radio.favorites.includes(rawResponse) ? 'text-red-500' : 'text-white/40 hover:text-white'"
-        :aria-label="radio.favorites.includes(rawResponse) ? 'Remove from favourites' : 'Save to favourites'"
+        class="heart grid h-9 w-9 shrink-0 place-items-center self-start text-2xl leading-none transition hover:scale-110"
+        :class="radio.favorites.includes(rawResponse) ? 'text-red-500' : 'text-white/70 hover:text-white'"
+        :aria-label="radio.favorites.includes(rawResponse) ? `Remove ${rawResponse} from favourites` : `Save ${rawResponse} to favourites`"
+        :aria-pressed="radio.favorites.includes(rawResponse)"
         @click="toggleFavorite(rawResponse)"
       >
-        {{ radio.favorites.includes(rawResponse) ? "♥" : "♡" }}
+        <span aria-hidden="true">{{ radio.favorites.includes(rawResponse) ? "♥" : "♡" }}</span>
       </button>
     </div>
     <div v-if="artwork || rawResponse !== 'Loading...'" class="mt-2 flex items-center justify-center gap-2 text-xs">
-      <span class="text-gray-500">Find this song:</span>
+      <span class="text-gray-400">Find this song:</span>
       <a
         v-for="l in links"
         :key="l.name"
@@ -102,7 +105,7 @@ function fetchArtwork(meta) {
         target="_blank"
         rel="noopener"
         class="rounded-full border border-white/15 px-3 py-1 text-gray-200 transition hover:border-white/60 hover:text-white"
-        >{{ l.name }}</a
+        >{{ l.name }}<span class="sr-only"> (opens in a new tab)</span></a
       >
     </div>
   </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from "vue";
+import { computed, ref, watch, onMounted, onBeforeUnmount } from "vue";
 import { radio } from "@/store";
 
 const playerSource = "https://cast.magicstreams.gr/sc/jziwpfyo/stream";
@@ -58,6 +58,12 @@ function onKey(e) {
 }
 onMounted(() => window.addEventListener("keydown", onKey));
 onBeforeUnmount(() => window.removeEventListener("keydown", onKey));
+
+const statusText = computed(() => {
+  if (state.value === "loading") return reconnecting.value ? "Reconnecting to the stream" : "Tuning in";
+  if (state.value === "playing") return "On air. Radio is playing.";
+  return failed.value ? "Stream unreachable. Press play to retry." : "";
+});
 
 let wantPlay = false;
 let retries = 0;
@@ -132,7 +138,6 @@ function toggle() {
       type="button"
       class="player-btn inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.18em] focus:outline-hidden focus-visible:ring-4 focus-visible:ring-white/70"
       :class="{ 'is-live': state === 'playing' }"
-      :aria-label="state === 'idle' ? 'Play live radio' : 'Stop radio'"
       @click="toggle"
     >
       <span v-if="state === 'loading'" class="h-4 w-4 animate-spin rounded-full border-2 border-black/15 border-t-black"></span>
@@ -150,13 +155,26 @@ function toggle() {
         <i v-for="n in 5" :key="n" class="eq-bar" :style="{ animationDelay: -n * 0.23 + 's' }"></i>
       </span>
     </button>
-    <p v-if="state === 'idle' && failed" class="mt-3 text-xs uppercase tracking-[0.2em] text-amber-400">
+    <p v-if="state === 'idle' && failed" class="mt-3 text-xs uppercase tracking-[0.2em] text-amber-400" aria-hidden="true">
       Stream unreachable · tap to retry
     </p>
-    <label v-if="state !== 'idle'" class="mt-2 flex items-center gap-3 text-gray-400">
+    <div v-if="state !== 'idle'" class="mt-2 flex items-center gap-3 text-gray-400">
       <span aria-hidden="true">{{ volume === 0 ? "🔇" : volume < 0.5 ? "🔉" : "🔊" }}</span>
-      <input v-model.number="volume" :style="{ '--v': volume }" type="range" min="0" max="1" step="0.01" aria-label="Volume" class="vol" />
-    </label>
+      <input
+        v-model.number="volume"
+        :style="{ '--v': volume }"
+        :aria-valuetext="`${Math.round(volume * 100)}%`"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        aria-label="Volume"
+        class="vol"
+      />
+    </div>
+    <p class="sr-only" role="status">{{ statusText }}</p>
+    <!-- Live radio has no transcript or captions to offer -->
+    <!-- eslint-disable-next-line vuejs-accessibility/media-has-caption -->
     <audio
       ref="audio"
       preload="none"

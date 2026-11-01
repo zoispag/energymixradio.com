@@ -9,7 +9,7 @@ describe("App", () => {
     const w = mount(App);
     await flushPromises();
     expect(w.find("img[alt='EnergyMixRadio']").exists()).toBe(true);
-    expect(w.find("button[aria-label='Play live radio']").exists()).toBe(true);
+    expect(w.findAll("button").some((b) => b.text().includes("Listen live"))).toBe(true);
     expect(w.text()).toContain("Share");
     expect(w.text()).toContain("Facebook");
     expect(w.text()).not.toContain("Request a song");

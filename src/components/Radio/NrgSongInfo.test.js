@@ -28,8 +28,8 @@ describe("NrgSongInfo", () => {
     const w = mount(NrgSongInfo);
     await flushPromises();
     expect(w.text()).toContain("Giom - Light Years (Extended Mix)");
-    expect(w.find("img[alt='Album cover']").attributes("src")).toBe("https://img.test/400x400bb.jpg");
-    const links = w.findAll("a").map((a) => a.text());
+    expect(w.find("img[alt^='Cover art for']").attributes("src")).toBe("https://img.test/400x400bb.jpg");
+    const links = w.findAll("a").map((a) => a.text().replace(" (opens in a new tab)", ""));
     expect(links).toEqual(["Spotify", "Apple Music", "YouTube"]);
     expect(radio.history[0].meta).toBe("Giom - Light Years (Extended Mix)");
     w.unmount();

@@ -15,7 +15,7 @@ describe("NrgPlayer", () => {
   it("starts idle with a play prompt", () => {
     const w = mount(NrgPlayer);
     expect(w.text()).toContain("Listen live");
-    expect(w.find("button").attributes("aria-label")).toBe("Play live radio");
+    expect(w.find("button").text()).toContain("Listen live");
   });
 
   it("tunes in on click, goes on air once audio plays, and stops on second click", async () => {
@@ -41,7 +41,7 @@ describe("NrgPlayer", () => {
     await w.find("button").trigger("click");
     await vi.runAllTimersAsync();
     expect(w.text()).toContain("Stream unreachable");
-    expect(w.find("button").attributes("aria-label")).toBe("Play live radio");
+    expect(w.find("button").text()).toContain("Listen live");
     vi.useRealTimers();
   });
 });

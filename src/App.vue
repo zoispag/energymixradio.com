@@ -23,7 +23,8 @@ import NrgFooter from "@/components/NrgFooter.vue";
     <NrgBackdrop />
     <NrgEqualizer />
     <NrgFocusMode />
-    <main class="mx-auto grid w-full max-w-5xl flex-1 grid-cols-[minmax(0,1fr)] content-center place-items-center gap-y-6 py-6 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-0 lg:py-2">
+    <main id="main" class="mx-auto grid w-full max-w-5xl flex-1 grid-cols-[minmax(0,1fr)] content-center place-items-center gap-y-6 py-6 lg:grid-cols-2 lg:gap-x-12 lg:gap-y-0 lg:py-2">
+      <h1 class="sr-only">EnergyMixRadio, live 24/7 internet radio</h1>
       <section class="flex w-full flex-col items-center">
         <NgrLogo />
         <NrgPlayer />
