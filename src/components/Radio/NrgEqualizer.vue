@@ -8,7 +8,7 @@ const bars = Array.from({ length: 56 }, (_, i) => ({
 </script>
 
 <template>
-  <div class="eq pointer-events-none fixed inset-x-0 bottom-0 z-0 flex h-40 items-end gap-[3px] px-1" :class="{ on: radio.playing }" aria-hidden="true">
+  <div class="eq pointer-events-none fixed inset-x-0 bottom-0 -z-10 flex h-40 items-end gap-[3px] px-1" :class="{ on: radio.playing }" aria-hidden="true">
     <i
       v-for="(b, i) in bars"
       :key="i"
