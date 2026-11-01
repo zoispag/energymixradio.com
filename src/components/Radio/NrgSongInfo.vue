@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, onMounted, onBeforeUnmount } from "vue";
-import { radio, remember } from "@/store";
+import { radio, remember, pickAccent } from "@/store";
 
 const streamUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
@@ -11,7 +11,10 @@ const artwork = ref(null);
 let lastLookup = "";
 
 watch(rawResponse, (v) => (radio.meta = v));
-watch(artwork, (v) => (radio.artwork = v));
+watch(artwork, async (v) => {
+  radio.artwork = v;
+  radio.accent = (v && (await pickAccent(v))) || "185, 28, 28";
+});
 
 onMounted(() => {
   fetchSong();
