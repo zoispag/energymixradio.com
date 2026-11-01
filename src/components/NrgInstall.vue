@@ -37,7 +37,8 @@ async function install() {
       Install app
     </button>
     <p v-if="showIosHint" class="mt-2 text-xs text-gray-400">
-      Tap <span class="font-bold">Share</span>, then <span class="font-bold">Add to Home Screen</span>.
+      Tap <span class="font-bold">Share</span>, scroll down the list and choose
+      <span class="font-bold">Add to Home Screen</span>.
     </p>
   </div>
 </template>
