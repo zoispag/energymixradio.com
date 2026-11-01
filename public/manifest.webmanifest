@@ -1,0 +1,14 @@
+{
+  "name": "EnergyMixRadio",
+  "short_name": "EnergyMix",
+  "description": "Live radio, non-stop energy.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#b91c1c",
+  "icons": [
+    { "src": "/img/icons/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/img/icons/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/img/icons/android-chrome-maskable-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

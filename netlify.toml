@@ -1,12 +1,19 @@
 [build]
-  command = "vite build"
-  functions = "netlify/functions"
+  command = "npm run build"
   publish = "dist"
 
-[context.production.environment]
-  NODE_ENV = "production"
+[build.environment]
+  NODE_VERSION = "24"
+  # The build tools (vite, tailwind) are devDependencies. Netlify sets NODE_ENV=production,
+  # which would make npm skip them, so ask for them explicitly.
+  NPM_CONFIG_INCLUDE = "dev"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
