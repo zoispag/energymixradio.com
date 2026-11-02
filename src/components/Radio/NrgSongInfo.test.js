@@ -7,10 +7,11 @@ function mockFetch() {
   vi.stubGlobal(
     "fetch",
     vi.fn((url) => {
-      const body = String(url).includes("itunes")
-        ? { results: [{ artworkUrl100: "https://img.test/100x100bb.jpg" }] }
-        : { data: [{ rawmeta: "Giom - Light Years (Extended Mix)" }] };
-      return Promise.resolve({ json: () => Promise.resolve(body) });
+      if (String(url).includes("itunes")) {
+        const body = { results: [{ artworkUrl100: "https://img.test/100x100bb.jpg" }] };
+        return Promise.resolve({ ok: true, json: () => Promise.resolve(body) });
+      }
+      return Promise.resolve({ ok: true, text: () => Promise.resolve("Giom - Light Years (Extended Mix)\n") });
     })
   );
 }
@@ -41,6 +42,22 @@ describe("NrgSongInfo", () => {
     await w.find("button.heart").trigger("click");
     expect(radio.favorites).toEqual(["Giom - Light Years (Extended Mix)"]);
     expect(w.find("button.heart").text()).toBe("♥");
+    w.unmount();
+  });
+
+  it("falls back to the Centova API when the proxied endpoint is missing", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((url) => {
+        const u = String(url);
+        if (u.includes("now-playing")) return Promise.resolve({ ok: true, text: () => Promise.resolve("<!doctype html>") });
+        if (u.includes("rpc.php")) return Promise.resolve({ ok: true, json: () => Promise.resolve({ data: [{ rawmeta: "Fallback - Track" }] }) });
+        return Promise.resolve({ ok: true, json: () => Promise.resolve({ results: [] }) });
+      })
+    );
+    const w = mount(NrgSongInfo);
+    await flushPromises();
+    expect(w.text()).toContain("Fallback - Track");
     w.unmount();
   });
 

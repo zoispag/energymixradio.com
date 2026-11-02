@@ -2,7 +2,10 @@
 import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import { radio, remember, pickAccent, toggleFavorite } from "@/store";
 
-const streamUrl =
+// Shoutcast's own current-song endpoint, proxied same-origin (netlify.toml / vite.config.js).
+// It updates the moment the stream does; the Centova API below lags by 20-60s, so it is only a fallback.
+const nowPlayingUrl = "/api/now-playing";
+const fallbackUrl =
   "https://cast.magicstreams.gr:2199/external/rpc.php?m=streaminfo.get&username=jziwpfyo&rid=jziwpfyo";
 
 const interval = ref(null);
@@ -34,17 +37,29 @@ onBeforeUnmount(() => {
 });
 
 function fetchSong() {
-  fetch(streamUrl, { method: "GET", mode: "cors" })
-    .then((response) => response.json())
-    .then((data) => {
-      const meta = data.data[0].rawmeta;
-      rawResponse.value = meta;
-      if (meta !== lastLookup) {
-        lastLookup = meta;
-        fetchArtwork(meta);
-      }
+  fetch(`${nowPlayingUrl}?sid=1&t=${Date.now()}`, { cache: "no-store" })
+    .then((r) => (r.ok ? r.text() : Promise.reject(new Error(`now-playing ${r.status}`))))
+    .then((text) => {
+      const meta = text.trim();
+      // An SPA fallback page or an empty body means the proxy is not in front of us
+      if (!meta || meta.startsWith("<")) throw new Error("now-playing unavailable");
+      return meta;
     })
+    .catch(() =>
+      fetch(fallbackUrl, { method: "GET", mode: "cors" })
+        .then((r) => r.json())
+        .then((data) => data.data[0].rawmeta)
+    )
+    .then(onMeta)
     .catch((error) => console.log(error));
+}
+
+function onMeta(meta) {
+  rawResponse.value = meta;
+  if (meta !== lastLookup) {
+    lastLookup = meta;
+    fetchArtwork(meta);
+  }
 }
 
 function fetchArtwork(meta) {

@@ -5,7 +5,7 @@ import vueA11y from "eslint-plugin-vuejs-accessibility";
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 
 export default [
-  { ignores: ["dist/**", "node_modules/**", "playwright-report/**", "test-results/**"] },
+  { ignores: ["dist/**", "node_modules/**", "playwright-report/**", "test-results/**", "design/**"] },
   js.configs.recommended,
   ...pluginVue.configs["flat/essential"],
   ...vueA11y.configs["flat/recommended"],

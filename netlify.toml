@@ -8,6 +8,14 @@
   # which would make npm skip them, so ask for them explicitly.
   NPM_CONFIG_INCLUDE = "dev"
 
+# Shoutcast's own "current song" endpoint changes the instant the stream does, while the
+# Centova control-panel API lags by 20-60s. It has no CORS headers, so proxy it same-origin.
+[[redirects]]
+  from = "/api/now-playing"
+  to = "https://cast.magicstreams.gr/sc/jziwpfyo/currentsong"
+  status = 200
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/index.html"

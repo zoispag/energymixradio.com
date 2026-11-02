@@ -2,8 +2,8 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.route("**/rpc.php**", (route) =>
-    route.fulfill({ json: { data: [{ rawmeta: "Giom - Light Years (Extended Mix)" }] } })
+  await page.route("**/api/now-playing**", (route) =>
+    route.fulfill({ contentType: "text/plain", body: "Giom - Light Years (Extended Mix)" })
   );
   await page.route("**/itunes.apple.com/**", (route) => route.fulfill({ json: { results: [] } }));
   await page.addInitScript(() => {

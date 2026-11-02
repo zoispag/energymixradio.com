@@ -10,10 +10,8 @@ const TRACKS = [
 
 test.beforeEach(async ({ page }) => {
   let n = 0;
-  await page.route("**/rpc.php**", (route) =>
-    route.fulfill({
-      json: { data: [{ rawmeta: TRACKS[Math.min(n++, TRACKS.length - 1)] }] },
-    })
+  await page.route("**/api/now-playing**", (route) =>
+    route.fulfill({ contentType: "text/plain", body: TRACKS[Math.min(n++, TRACKS.length - 1)] })
   );
   await page.route("**/itunes.apple.com/**", (route) =>
     route.fulfill({ json: { results: [] } })
@@ -167,7 +165,7 @@ test("iPhone visitors are pointed at the browser's own share menu for Add to Hom
     viewport: { width: 390, height: 844 },
   });
   const page = await context.newPage();
-  await page.route("**/rpc.php**", (route) => route.fulfill({ json: { data: [{ rawmeta: "A - B" }] } }));
+  await page.route("**/api/now-playing**", (route) => route.fulfill({ contentType: "text/plain", body: "A - B" }));
   await page.route("**/itunes.apple.com/**", (route) => route.fulfill({ json: { results: [] } }));
   await page.goto("/");
   await page.getByRole("button", { name: "Install app" }).click();
