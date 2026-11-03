@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0 0.3em;
-  font-size: clamp(1rem, 2.6vh, 1.6rem);
+  font-size: clamp(0.75rem, 1.7vh, 1.05rem);
   font-weight: 900;
   line-height: 1.2;
   text-transform: none;
@@ -159,11 +159,11 @@ onBeforeUnmount(() => {
 .gold {
   text-transform: uppercase;
   background-image: linear-gradient(180deg, #ffe9a8 0%, #ffc552 38%, #f39a1d 62%, #c86e0e 100%);
-  filter: drop-shadow(0 0 10px rgba(255, 160, 40, 0.35));
+  filter: drop-shadow(0 0 6px rgba(255, 160, 40, 0.3));
 }
 .chrome {
   background-image: linear-gradient(180deg, #ffffff 0%, #e6e8ec 40%, #9ea3ab 60%, #d5d8dd 100%);
-  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.18));
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.15));
 }
 .focus-enter-active,
 .focus-leave-active {
