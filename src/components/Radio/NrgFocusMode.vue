@@ -143,7 +143,7 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0 0.3em;
-  font-size: clamp(0.75rem, 1.7vh, 1.05rem);
+  font-size: clamp(0.85rem, 2vh, 1.2rem);
   font-weight: 900;
   line-height: 1.2;
   text-transform: none;

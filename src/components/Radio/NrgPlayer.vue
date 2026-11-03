@@ -143,7 +143,7 @@ function toggle() {
       </svg>
       <span v-if="state === 'idle'">Listen live</span>
       <span v-else-if="state === 'loading'">{{ reconnecting ? "Reconnecting…" : "Tuning in…" }}</span>
-      <span v-else>On air</span>
+      <span v-else>On air<span class="sr-only"> · Stop</span></span>
       <!-- Always-moving bars: signals "audio, click me" without shouting -->
       <span class="eq" aria-hidden="true">
         <i v-for="n in 5" :key="n" class="eq-bar" :style="{ animationDelay: -n * 0.23 + 's' }"></i>

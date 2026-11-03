@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-full flex-col items-center px-2 pb-4 lg:pb-1">
-    <img src="@/assets/logo.webp" alt="EnergyMixRadio" width="797" height="469" fetchpriority="high" class="logo w-full max-w-xs sm:max-w-sm lg:w-[min(30rem,46vh)]" />
+    <img src="@/assets/logo.webp" alt="EnergyMixRadio" width="967" height="698" fetchpriority="high" class="logo w-full max-w-xs sm:max-w-sm lg:w-[min(30rem,46vh)]" />
     <p class="relative z-10 mt-2 flex whitespace-nowrap lg:mt-1 items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.25em] text-gray-300">
       <span class="live-dot" aria-hidden="true"></span>
       Live 24/7
