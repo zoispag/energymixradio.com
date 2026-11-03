@@ -102,12 +102,12 @@ onBeforeUnmount(() => {
         v-if="radio.artwork"
         :src="radio.artwork"
         :alt="`Cover art for ${radio.meta}`"
-        class="aspect-square w-[min(48vh,80vw)] rounded-2xl object-cover shadow-2xl shadow-black"
+        class="aspect-square w-[min(44vh,80vw)] rounded-2xl object-cover shadow-2xl shadow-black"
         :style="{ boxShadow: `0 0 120px -20px ${radio.accent}` }"
       />
       <div
         v-else
-        class="grid aspect-square w-[min(48vh,80vw)] place-items-center rounded-2xl bg-linear-to-br from-red-700 to-black text-8xl text-white/60"
+        class="grid aspect-square w-[min(44vh,80vw)] place-items-center rounded-2xl bg-linear-to-br from-red-700 to-black text-8xl text-white/60"
         aria-hidden="true"
       >
         ♪
@@ -128,11 +128,43 @@ onBeforeUnmount(() => {
         Close · Esc
       </button>
       <div class="text-xs tracking-[0.2em] text-gray-500" aria-hidden="true">www.EnergyMixRadio.com</div>
+      <p class="tagline -mt-[1vh]" aria-label="Dealer of house music">
+        <span class="whitespace-nowrap"><span class="chrome">&ldquo;</span><span class="gold -mr-[0.3em] tracking-[0.3em]">DEALER</span><span class="chrome">&rdquo;</span></span>
+        <span class="chrome">of</span> <span class="gold">HOUSE</span> <span class="chrome">music</span>
+      </p>
     </div>
   </Transition>
 </template>
 
 <style scoped>
+/* "Dealer" of house music: gold and chrome lettering, no image */
+.tagline {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.3em;
+  font-size: clamp(1rem, 2.6vh, 1.6rem);
+  font-weight: 900;
+  line-height: 1.2;
+  text-transform: none;
+  -webkit-text-stroke: 0.4px rgba(255, 255, 255, 0.12);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.6));
+}
+.tagline .gold,
+.tagline .chrome {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.gold {
+  text-transform: uppercase;
+  background-image: linear-gradient(180deg, #ffe9a8 0%, #ffc552 38%, #f39a1d 62%, #c86e0e 100%);
+  filter: drop-shadow(0 0 10px rgba(255, 160, 40, 0.35));
+}
+.chrome {
+  background-image: linear-gradient(180deg, #ffffff 0%, #e6e8ec 40%, #9ea3ab 60%, #d5d8dd 100%);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.18));
+}
 .focus-enter-active,
 .focus-leave-active {
   transition: opacity 0.4s ease;
