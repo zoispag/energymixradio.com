@@ -129,7 +129,7 @@ onBeforeUnmount(() => {
       </button>
       <div class="text-xs tracking-[0.2em] text-gray-500" aria-hidden="true">www.EnergyMixRadio.com</div>
       <p class="tagline -mt-[1vh]" aria-label="Dealer of house music">
-        <span class="whitespace-nowrap"><span class="chrome">&ldquo;</span><span class="gold -mr-[0.3em] tracking-[0.3em]">DEALER</span><span class="chrome">&rdquo;</span></span>
+        <span class="whitespace-nowrap"><span class="chrome">&ldquo;</span><span class="gold ml-[0.3em] tracking-[0.3em]">DEALER</span><span class="chrome">&rdquo;</span></span>
         <span class="chrome">of</span> <span class="gold">HOUSE</span> <span class="chrome">music</span>
       </p>
     </div>
